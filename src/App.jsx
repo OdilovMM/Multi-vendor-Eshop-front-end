@@ -27,7 +27,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMyWishlists } from "./store/reducers/cartReducer";
 
-
 const App = () => {
   const dispatch = useDispatch();
 

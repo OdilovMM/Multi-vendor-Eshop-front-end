@@ -29,7 +29,6 @@ const StripePayment = ({ orderId, price }) => {
         { price },
         { withCredentials: true }
       );
-      console.log(data);
       setClientSecret(data.clientSecret);
     } catch (error) {
       console.log(error.response);

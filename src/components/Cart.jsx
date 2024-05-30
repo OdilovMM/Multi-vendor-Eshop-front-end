@@ -48,30 +48,33 @@ const Cart = ({ product, index }) => {
       toast.error("Please, Login first");
     }
   };
-
+  
   return (
     <>
-      <div key={index} className="w-[232px] h-[400px] flex flex-col justify-between md:w-[260px] overflow-hidden border-[0.5px] border-grey-200 md-lg:w-[290px] group  rounded-[6px] shadow-md  relative cursor-pointer">
+      <div
+        key={index}
+        className="w-[232px] h-[400px] flex flex-col justify-between md:w-[260px] overflow-hidden border-[0.5px] border-grey-200 md-lg:w-[290px] group  rounded-[6px] shadow-md  relative cursor-pointer"
+      >
         <div className="relative h-[300px] overflow-hidden   ">
           <Link className=" h-full w-full   flex justify-center items-center transition-transform duration-500 transform scale-105 group-hover:scale-110">
             <img
               src={product?.images[0]}
               alt={product?.name}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain "
             />
           </Link>
           {/* sale */}
           <div className="flex flex-col  absolute top-0 gap-3 ">
             {product?.discount > 0 ? (
               <>
-                <img src={saleIcon} alt="" />
+                <img src={saleIcon} alt="" className="h-[35px] p-1" />
               </>
             ) : (
-              <span className="bg-red-500 text-[14px] shadow-sm pl-2"></span>
+              <span className="bg-red-500 text-[12px] shadow-sm pl-2"></span>
             )}
 
             {product?.discount ? (
-              <span className="bg-black text-white px-2 shadow-sm text-[14px]">
+              <span className="bg-black text-white px-2 shadow-sm text-[10px]">
                 -{product?.discount}%
               </span>
             ) : (

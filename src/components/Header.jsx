@@ -69,12 +69,6 @@ const Header = () => {
         <div className="w-[85%] lg:w-[90%] mx-auto">
           <div className="flex w-full justify-between items-center h-[50px] text-black">
             <ul className="flex justify-start items-center gap-6 font-semibold text-black">
-              <li className="flex relative justify-center items-center gap-2 text-sm after:absolute after:h-[18px] after:w-[1px] after:bg-[#afafaf] after:-right-[16px]">
-                <span>
-                  <IoIosMail size={18} />
-                </span>
-                <span>xolmurododilov@gmail.com</span>
-              </li>
               <li className="flex relative justify-center items-center gap-2 text-sm ">
                 <span>
                   <MdAddIcCall size={18} />

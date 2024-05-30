@@ -5,7 +5,7 @@ import { AiFillStar } from "react-icons/ai";
 import { CiStar } from "react-icons/ci";
 import { Products } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { GridLoader } from "react-spinners";
+import { FadeLoader } from "react-spinners";
 
 import {
   getProductsPriceRange,
@@ -24,7 +24,6 @@ const Shop = () => {
     isLoading,
   } = useSelector((state) => state.home);
 
-  const defaultPriceRange = { low: 0, high: 1000 };
 
   useEffect(() => {
     dispatch(getProductsPriceRange());
@@ -79,10 +78,7 @@ const Shop = () => {
     setSortPrice("");
     setCurrentPage(1);
     setValue({
-      values: [
-        priceRange?.low || defaultPriceRange.low,
-        priceRange?.high || defaultPriceRange.high,
-      ],
+      values: [priceRange?.low, priceRange?.high],
     });
   };
 
@@ -159,8 +155,8 @@ const Shop = () => {
                   step={1}
                   // min={priceRange.low}
                   // max={priceRange.high}
-                  min={priceRange?.low || defaultPriceRange.low}
-                  max={priceRange?.high || defaultPriceRange.high}
+                  min={priceRange?.low}
+                  max={priceRange?.high}
                   values={value.values}
                   onChange={(values) => setValue({ values })}
                   renderTrack={({ props, children }) => (
@@ -360,7 +356,7 @@ const Shop = () => {
                 {/* <div className="grid pb-8 gap-4 grid-cols-4 md:grid-cols-3 md:gap-3 md-lg:grid-cols-2  sm:grid-cols-1"> */}
                 {isLoading ? (
                   <div className="flex flex-wrap justify-center items-center mt-[250px]">
-                    <GridLoader margin={3} size={39} />
+                    <FadeLoader margin={3} size={39} />
                   </div>
                 ) : (
                   <div className="flex flex-row gap-[8px] flex-wrap">

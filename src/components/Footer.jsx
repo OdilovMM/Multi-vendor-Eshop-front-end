@@ -52,12 +52,12 @@ const Footer = () => {
                     <Link>Delivery Information </Link>
                   </li>
                   <li className="px-2 py-1 bg-slate-300 rounded-md">
-                    <Link to="https://admin-seller-dashboard.vercel.app/admin/login">
+                    <Link to="http://localhost:3000/admin/login">
                       Go to Admin Dashboard{" "}
                     </Link>
                   </li>
                   <li className="px-2 py-1 bg-slate-300 rounded-md">
-                    <Link to="https://admin-seller-dashboard.vercel.app/seller/login">
+                    <Link to="http://localhost:3000/seller/login">
                       Go to Seller Dashboard{" "}
                     </Link>
                   </li>
@@ -87,7 +87,7 @@ const Footer = () => {
                 <li>
                   <Link
                     className="w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-white rounded-full"
-                    to="#"
+                    to="https://github.com/OdilovMM"
                   >
                     <FaFacebookF size={22} />{" "}
                   </Link>
@@ -96,7 +96,7 @@ const Footer = () => {
                 <li>
                   <Link
                     className="w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-white rounded-full"
-                    to="#"
+                    to="https://t.me/Makhmudovichk"
                   >
                     <FaTelegram size={22} />{" "}
                   </Link>
@@ -104,7 +104,7 @@ const Footer = () => {
                 <li>
                   <Link
                     className="w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-white rounded-full"
-                    to="#"
+                    to="https://github.com/OdilovMM"
                   >
                     <FaLinkedin size={22} />{" "}
                   </Link>
@@ -112,7 +112,7 @@ const Footer = () => {
                 <li>
                   <Link
                     className="w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-white rounded-full"
-                    to="#"
+                    to="https://github.com/OdilovMM"
                   >
                     <FaGithub size={22} />{" "}
                   </Link>
