@@ -1,4 +1,5 @@
-import './index.css'
+import "./index.css";
+import React from "react";
 import { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { Toaster } from "react-hot-toast";
@@ -10,16 +11,16 @@ import App from "./App";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  // <React.StrictMode>
-  <Provider store={store}>
-    <Suspense>
-      <App />
-      <Toaster
-        toastOptions={{
-          position: "top-center",
-        }}
-      />
-    </Suspense>
-  </Provider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
+      <Suspense>
+        <App />
+        <Toaster
+          toastOptions={{
+            position: "top-center",
+          }}
+        />
+      </Suspense>
+    </Provider>
+  </React.StrictMode>
 );

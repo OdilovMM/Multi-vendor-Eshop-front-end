@@ -31,7 +31,6 @@ const Banner = () => {
     },
   };
 
-  console.log(banners)
 
   return (
     <div className="w-full md-lg:mt-6">
