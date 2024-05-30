@@ -468,15 +468,15 @@ const Header = () => {
               </div>
               <div
                 className={`${
-                  showCategory ? "h-0" : "h-[480px]"
+                  showCategory ? "h-0" : "h-[550px]"
                 } overflow-hidden transition-all md-lg:relative duration-100 absolute z-[99999] bg-[#f1fafa] w-full border-x`}
               >
-                <ul className="py-2 text-slate-600 font-semibold uppercase">
+                <ul className="py-2 text-slate-600 overflow-y-scroll h-full font-semibold uppercase">
                   {categories?.map((cat, index) => {
                     return (
                       <li
                         key={index}
-                        className="flex items-center gap-2 justify-start px-2 py-[3px]"
+                        className="flex items-center hover:bg-slate-400 transition-all duration-300 hover:text-white  gap-2 justify-start px-2 py-[3px]"
                       >
                         <img
                           src={cat.image}
@@ -486,7 +486,7 @@ const Header = () => {
                         <Link
                           onClick={() => setShowCategory(!showCategory)}
                           to={`/products?category=${cat.name}`}
-                          className="text-sm block hover:text-yellow-700 capitalize"
+                          className="text-sm block capitalize"
                         >
                           {cat.name}
                         </Link>

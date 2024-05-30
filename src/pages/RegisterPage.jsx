@@ -38,9 +38,9 @@ const RegisterPage = () => {
   }, [userInfo, navigate, dispatch]);
 
   return (
-    <div className="min-w-screen h-full  py-9 my-5 bg-[#e5e1e1] flex items-center justify-center">
-      <div className="w-[350px] shadow-lg text-[#fffFFF] bg-[#c1dcd6] p-7 rounded-md">
-        <h2 className="text-xl mb-3 font-bold">Register</h2>
+    <div className="min-w-screen h-full  py-9 my-5  flex items-center justify-center">
+      <div className="w-[350px] shadow-xl text-[#fffFFF] bg-[#ebf1f0] p-7 rounded-md">
+        <h2 className="text-xl text-black mb-3 font-bold">Register</h2>
 
         <form className="space-y-6" onSubmit={handleRegister}>
           <div>

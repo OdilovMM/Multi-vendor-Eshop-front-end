@@ -139,7 +139,7 @@ const ProductDetail = () => {
 
   return (
     <>
-      <div className="bg-[url('http://localhost:3001/images/banner/shop.png')]  h-[220px] mt-6 bg-cover bg-no-repeat bg-left">
+      <div className="bg-[url('http://localhost:3001/images/banner/shop.png')] bg-slate-200  h-[120px] mt-6 bg-cover bg-no-repeat bg-left">
         <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-black">
           <h2 className="text-3xl font-bold">Product Details</h2>
           <div className="flex justify-center items-center gap-2 text-2xl w-full">
@@ -159,9 +159,9 @@ const ProductDetail = () => {
         <div className="grid grid-cols-2 md-lg:grid-cols-1 gap-8">
           <div className="w-[450px]">
             {/* product main image */}
-            <div className=" border">
+            <div className=" border h-[600px] w-[550px] shadow-lg rounded-md overflow-hidden ">
               <img
-                className="h-[600px] w-[450px] object-fit"
+                className="object-center"
                 src={image ? image : product?.images?.[0]}
                 alt=""
               />
@@ -178,9 +178,13 @@ const ProductDetail = () => {
                 >
                   {product?.images?.map((img, i) => {
                     return (
-                      <div key={i} onClick={() => setImage(img)}>
+                      <div
+                        key={i}
+                        className="h-[100px] border-b mx-1"
+                        onClick={() => setImage(img)}
+                      >
                         <img
-                          className="h-[120px] cursor-pointer"
+                          className=" cursor-pointer object-center hover:scale-110"
                           src={img}
                           alt=""
                         />

@@ -49,7 +49,7 @@ const Category = () => {
       <Carousel
         autoPlay={true}
         infinite={true}
-        arrows={false}
+        arrows={true}
         responsive={responsive}
         transitionDuration={800}
         draggable={false}
@@ -57,7 +57,7 @@ const Category = () => {
         {categories.map((category, i) => (
           <Link
             to={`/products?category=${category.name}`}
-            className="h-[120px] w-[120px] border block"
+            className="h-[120px] w-[120px] border block hover:bg-slate-500"
             key={i}
           >
             <div className="w-full h-full relative p-3 bg-white ">

@@ -52,12 +52,12 @@ const Footer = () => {
                     <Link>Delivery Information </Link>
                   </li>
                   <li className="px-2 py-1 bg-slate-300 rounded-md">
-                    <Link to="https://admin-dashboard-rouge-seven.vercel.app/admin/login">
+                    <Link to="https://admin-dashboard-eshop.vercel.app/admin/login">
                       Go to Admin Dashboard{" "}
                     </Link>
                   </li>
                   <li className="px-2 py-1 bg-slate-300 rounded-md">
-                    <Link to="https://admin-dashboard-rouge-seven.vercel.app/seller/login">
+                    <Link to="https://admin-dashboard-eshop.vercel.app/login">
                       Go to Seller Dashboard{" "}
                     </Link>
                   </li>

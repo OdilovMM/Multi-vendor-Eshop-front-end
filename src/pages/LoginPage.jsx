@@ -9,9 +9,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
-  const { loader, userInfo } = useSelector(
-    (state) => state.customerAuth
-  );
+  const { loader, userInfo } = useSelector((state) => state.customerAuth);
 
   const [credentials, setCredentials] = useState({
     email: "",
@@ -40,9 +38,9 @@ const LoginPage = () => {
   }, [dispatch, navigate, userInfo]);
 
   return (
-    <div className="min-w-screen h-full py-9 my-5 bg-[#e5e1e1] flex items-center justify-center">
-      <div className="w-[350px] text-[#fffFFF] bg-[#c1dcd6] shadow-lg p-7 rounded-md">
-        <h2 className="text-xl mb-3 font-bold">Login</h2>
+    <div className="min-w-screen h-full py-9 my-5  flex items-center justify-center">
+      <div className="w-[350px] text-[#fffFFF] bg-[#ecf0ef] shadow-xl p-7 rounded-md">
+        <h2 className="text-xl text-black mb-3 font-bold">Login</h2>
 
         <form className="space-y-6" onSubmit={handleSubmitData}>
           <div>
