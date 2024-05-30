@@ -31,6 +31,8 @@ const Banner = () => {
     },
   };
 
+  console.log(banners)
+
   return (
     <div className="w-full md-lg:mt-6">
       <div className="w-[85%] lg:w-[90%] mx-auto ">
