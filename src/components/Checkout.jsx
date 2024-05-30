@@ -27,7 +27,7 @@ const Checkout = ({ orderId }) => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "https://multi-vendor-eshop-front-end.vercel.app/confirm",
+        return_url: "https://multivendor-eshop.vercel.app/confirm",
       },
     });
     if (error.type === "card_error" || error.type === "validation_error") {
