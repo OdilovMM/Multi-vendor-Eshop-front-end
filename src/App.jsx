@@ -22,7 +22,6 @@ import {
 import { MainLayout } from "./layout";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { OrderDetails } from "./components";
-import Chat from "./components/profile/Chat";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMyWishlists } from "./store/reducers/cartReducer";
@@ -33,7 +32,11 @@ const App = () => {
   const { userInfo } = useSelector((state) => state.customerAuth);
 
   useEffect(() => {
-    dispatch(getAllMyWishlists(userInfo.id));
+    if (userInfo) {
+      dispatch(getAllMyWishlists(userInfo.id));
+    } else {
+      return;
+    }
   }, [userInfo, dispatch]);
 
   return (
@@ -65,10 +68,8 @@ const App = () => {
           >
             <Route index element={<HomeProfile />} />
             <Route path="my-orders" element={<MyOrderPage />} />
-            <Route path="chat" element={<Chat />} />
             <Route path="my-wishlist" element={<WishlistPage />} />
             <Route path="order/details/:orderId" element={<OrderDetails />} />
-            <Route path="chat/:sellerId" element={<Chat />} />
           </Route>
         </Route>
       </Routes>

@@ -62,7 +62,7 @@ const Products = ({ title, products }) => {
             <div key={i} className="flex flex-col justify-start gap-2">
               {p.map((pl, j) => (
                 <Link
-                  to={`/product/details/${pl._id}`}
+                  to={`/product/details/${pl.slug}`}
                   key={j}
                   className="flex justify-start items-start"
                 >

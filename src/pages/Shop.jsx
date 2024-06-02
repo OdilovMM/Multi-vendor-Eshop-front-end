@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { BreadCrumbs, Cart, Pagination } from "../components";
 import { Range } from "react-range";
 import { AiFillStar } from "react-icons/ai";
@@ -6,13 +6,16 @@ import { CiStar } from "react-icons/ci";
 import { Products } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { FadeLoader } from "react-spinners";
-
 import {
   getProductsPriceRange,
   queryProduct,
 } from "../store/reducers/homeReducer";
 
 const Shop = () => {
+  const [filter, setFilter] = useState(true);
+  const [rating, setRating] = useState("");
+  const [sortPrice, setSortPrice] = useState("");
+  const [searchCategory, setSearchCategory] = useState("");
   const dispatch = useDispatch();
   const {
     latestProduct,
@@ -34,20 +37,6 @@ const Shop = () => {
     });
   }, [priceRange]);
 
-  const [filter, setFilter] = useState(true);
-  const [rating, setRating] = useState("");
-  const [sortPrice, setSortPrice] = useState("");
-
-  const [searchCategory, setSearchCategory] = useState("");
-
-  const queryCategory = (e, value) => {
-    if (e.target.checked) {
-      setSearchCategory(value);
-    } else {
-      setSearchCategory("");
-    }
-  };
-
   // for pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(5);
@@ -57,12 +46,20 @@ const Shop = () => {
     values: [priceRange.low, priceRange.high],
   });
 
+  const queryCategory = (e, value) => {
+    if (e.target.checked) {
+      setSearchCategory(value);
+    } else {
+      setSearchCategory("");
+    }
+  };
+
   // product querying
   useEffect(() => {
     dispatch(
       queryProduct({
-        low: value?.values[0],
-        high: value?.values[1],
+        low: value?.values[0] || "",
+        high: value?.values[1] || "",
         searchCategory,
         rating,
         sortPrice,
@@ -83,15 +80,14 @@ const Shop = () => {
 
   return (
     <>
-      <div className="bg-[url('http://localhost:3000/images/banner/shop.png')]  bg-slate-200  h-[120px] mt-6 bg-cover bg-no-repeat bg-left">
+      <div className="  bg-[#fff]  h-[80px] bg-cover bg-no-repeat bg-left">
         <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-black">
-          <h2 className="text-3xl font-bold">Shop Page</h2>
-          <div className="flex justify-center items-center gap-2 text-2xl w-full">
+          <div className="flex justify-center items-center gap-2 text-lg w-full">
             <BreadCrumbs
               from="/"
               fromPage="Home"
               to="/shop"
-              iconSize={27}
+              iconSize={20}
               toPage="Shop"
               iconColor="black"
             />
@@ -307,7 +303,7 @@ const Shop = () => {
 
             <div className="w-9/12 md-lg:w-8/12 md:w-full">
               <div className="pl-8 md:pl-0">
-                <div className="py-4 bg-white mb-10 px-3 p-4 shadow-md rounded-md rounded-md flex justify-between items-start border">
+                <div className="py-4 bg-white mb-10 px-3 p-4 shadow-md rounded-md flex justify-between items-start border">
                   <h2 className="text-lg font-medium text-slate-600">
                     {totalProducts === 0
                       ? "No products found"
@@ -321,21 +317,7 @@ const Shop = () => {
                       onClick={resetFilter}
                       className="inline-flex items-center px-4 py-[6px] bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 mr-2"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
-                        />
-                      </svg>
-                      Restore
+                      Reset
                     </button>
 
                     <select
@@ -352,16 +334,21 @@ const Shop = () => {
                 </div>
 
                 {/* Products */}
-                {/* <div className="grid pb-8 gap-4 grid-cols-4 md:grid-cols-3 md:gap-3 md-lg:grid-cols-2  sm:grid-cols-1"> */}
                 {isLoading ? (
                   <div className="flex flex-wrap justify-center items-center mt-[250px]">
                     <FadeLoader margin={3} size={39} />
                   </div>
                 ) : (
                   <div className="flex flex-row gap-[8px] flex-wrap">
-                    {products.map((product, index) => (
-                      <Cart product={product} index={index} key={product._id} />
-                    ))}
+                    {products.map((product, index) => {
+                      return (
+                        <Cart
+                          product={product}
+                          index={index}
+                          key={product._id}
+                        />
+                      );
+                    })}
                   </div>
                 )}
                 <div className="flex justify-end">

@@ -10,7 +10,6 @@ import {
   incrementProductQuantity,
   decrementProductQuantity,
 } from "./../store/reducers/cartReducer.js";
-import toast from "react-hot-toast";
 import emptyCart from "../assets/icon/empty-cart.png";
 
 const AddedProductCart = () => {
@@ -27,12 +26,13 @@ const AddedProductCart = () => {
   const { userInfo } = useSelector((state) => state.customerAuth);
 
   useEffect(() => {
-    dispatch(getCustomerCartProducts(userInfo.id));
+    if (userInfo) {
+      dispatch(getCustomerCartProducts(userInfo.id));
+    }
   }, [dispatch, userInfo]);
 
   useEffect(() => {
     if (successMessage) {
-      toast.success(successMessage);
       dispatch(messageClear());
       dispatch(getCustomerCartProducts(userInfo.id));
     }
@@ -65,15 +65,14 @@ const AddedProductCart = () => {
   return (
     <>
       {/* BreadCrumbs */}
-      <div className="bg-[url('http://localhost:3000/images/banner/shop.png')]  h-[220px] mt-6 bg-cover bg-no-repeat bg-left">
-        <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-black">
-          <h2 className="text-3xl font-bold">My Cart Page</h2>
-          <div className="flex justify-center items-center gap-2 text-2xl w-full">
+      <div className=" bg-[#fff]  h-[80px] bg-cover bg-no-repeat bg-left">
+        <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-gray-400">
+          <div className="flex justify-center items-center gap-2 text-lg w-full">
             <BreadCrumbs
               from="/"
               fromPage="Home"
               to="/my-cart"
-              iconSize={27}
+              iconSize={20}
               toPage="My Cart"
               iconColor="black"
             />
@@ -83,7 +82,7 @@ const AddedProductCart = () => {
 
       {/* main */}
 
-      <div className="bg-[#e1e4e6a3] min-h-[65vh] ">
+      <div className="bg-[#fff] min-h-[65vh] ">
         <div className="w-[85%] lg:w-[90%] md:w-[90%] sm:w-[90%] mx-auto py-14">
           {card_products.length > 0 || outofstock_products.length > 0 ? (
             <div className="flex flex-wrap">
@@ -111,7 +110,7 @@ const AddedProductCart = () => {
                           <div key={index} className="w-full flex flex-wrap">
                             <div className="flex sm:w-full gap-2 w-7/12">
                               <div className="flex gap-2 justify-start items-center">
-                                <Link >
+                                <Link>
                                   <img
                                     className="w-[80px] h-[80px] object-contain"
                                     src={product.productInfo.images[0]}
@@ -349,7 +348,7 @@ const AddedProductCart = () => {
           ) : (
             <div className=" w-[470px] flex justify-center items-center mx-auto">
               <div>
-                <div className="w-[280px] md:w-[200px] mx-auto">
+                <div className="w-[140px] md:w-[180px] mx-auto">
                   <img src={emptyCart} className="" alt="" />
                 </div>
                 <div className="flex flex-col items-center justify-center gap-2">
@@ -360,7 +359,7 @@ const AddedProductCart = () => {
                     Must add items on the cart before you proceed to check out
                   </p>
                   <Link
-                    className="px-6 py-1 bg-[#e84949] rounded-[15px] font-bold text-[#fff] uppercase"
+                    className="px-6 py-1 bg-[#6f3a3a] rounded-[15px] font-bold text-[#fff] uppercase"
                     to="/shop"
                   >
                     Return to shop

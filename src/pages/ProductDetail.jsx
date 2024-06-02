@@ -49,11 +49,11 @@ const ProductDetail = () => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 4,
+      items: 6,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 4,
+      items: 6,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -61,7 +61,7 @@ const ProductDetail = () => {
     },
     mdtablet: {
       breakpoint: { max: 991, min: 464 },
-      items: 4,
+      items: 3,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
@@ -69,11 +69,11 @@ const ProductDetail = () => {
     },
     smmobile: {
       breakpoint: { max: 640, min: 0 },
-      items: 2,
+      items: 3,
     },
     xsmobile: {
       breakpoint: { max: 440, min: 0 },
-      items: 1,
+      items: 3,
     },
   };
 
@@ -138,16 +138,15 @@ const ProductDetail = () => {
   };
 
   return (
-    <>
-      <div className="bg-[url('http://localhost:3001/images/banner/shop.png')] bg-slate-200  h-[120px] mt-6 bg-cover bg-no-repeat bg-left">
+    <div className="overflow-y-hidden">
+      <div className="bg-[url('http://localhost:3001/images/banner/shop.png')] bg-slate-200 md:min-w-[320px] h-[120px] mt-6 bg-cover bg-no-repeat bg-left">
         <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-black">
-          <h2 className="text-3xl font-bold">Product Details</h2>
-          <div className="flex justify-center items-center gap-2 text-2xl w-full">
+          <div className="flex justify-center md:items-start md:justify-start items-center gap-2 md:text-[12px] text-2xl w-full">
             <BreadCrumbs
               from="/"
               fromPage={product?.category}
               to="/product/details/:defea"
-              iconSize={27}
+              iconSize={18}
               toPage={product?.name}
               iconColor="black"
             />
@@ -155,11 +154,11 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      <div className="w-[85%] py-4 md:w-[80%] sm:w-[90%] lg:w-[90%] mt-3 h-full mx-auto">
+      <div className="w-[85%] py-4 md:w-[320px] sm:w-[90%] lg:w-[90%] mt-3 h-full mx-auto">
         <div className="grid grid-cols-2 md-lg:grid-cols-1 gap-8">
-          <div className="w-[450px]">
+          <div className="w-[450px] md:w-[320px]">
             {/* product main image */}
-            <div className=" border h-[600px] w-[550px] shadow-lg rounded-md overflow-hidden ">
+            <div className=" border md:h-[300px] md:max-w-[290px] h-[600px] w-[550px] shadow-lg rounded-md overflow-hidden ">
               <img
                 className="object-center"
                 src={image ? image : product?.images?.[0]}
@@ -167,7 +166,7 @@ const ProductDetail = () => {
               />
             </div>
             {/* product carousel */}
-            <div className="py-3">
+            <div className="py-3 md-lg:w-[300px]">
               {product?.images && (
                 <Carousel
                   autoPlay={false}
@@ -180,7 +179,7 @@ const ProductDetail = () => {
                     return (
                       <div
                         key={i}
-                        className="h-[100px] border-b mx-1"
+                        className="h-[100px] border-b mx-1 md:h-[80px] md:w-[80px]"
                         onClick={() => setImage(img)}
                       >
                         <img
@@ -209,7 +208,7 @@ const ProductDetail = () => {
             </div>
 
             {/* product price */}
-            <div className="text-2xl text-red-600 font-bold flex gap-3">
+            <div className="text-2xl md:text-[13px] text-red-600 font-bold flex gap-3 md:flex-col">
               {product?.discount !== 0 ? (
                 <div className="flex flex-row gap-2 items-center">
                   <h2>
@@ -347,13 +346,6 @@ const ProductDetail = () => {
                 >
                   Buy Now
                 </button>
-
-                <Link
-                  to={`/dashboard/chat/${product.sellerId}`}
-                  className="inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
-                >
-                  Chat Seller
-                </Link>
               </div>
             </div>
           </div>
@@ -367,9 +359,9 @@ const ProductDetail = () => {
               <div className="grid grid-cols-2 gap-1">
                 <button
                   onClick={() => setState("reviews")}
-                  className={`inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md ${
+                  className={`inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-[#646765] hover:text-white text-gray-800 text-sm font-medium rounded-md ${
                     state === "reviews"
-                      ? "bg-[#059473] text-white"
+                      ? "bg-[#646765] text-white"
                       : "bg-slate-200 text-black"
                   }  `}
                 >
@@ -377,9 +369,9 @@ const ProductDetail = () => {
                 </button>
                 <button
                   onClick={() => setState("description")}
-                  className={`inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md ${
+                  className={`inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-[#646765] hover:text-white text-sm font-medium rounded-md ${
                     state === "description"
-                      ? "bg-[#059473] text-white"
+                      ? "bg-[#646765] text-white"
                       : "bg-slate-200 text-black"
                   }  `}
                 >
@@ -391,7 +383,7 @@ const ProductDetail = () => {
                 {state === "reviews" ? (
                   <ProductReviews product={product} />
                 ) : (
-                  <ProductDescription />
+                  <ProductDescription product={product} />
                 )}
               </div>
             </div>
@@ -461,7 +453,7 @@ const ProductDetail = () => {
           <div className="custom_bullet justify-center !w-auto"></div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

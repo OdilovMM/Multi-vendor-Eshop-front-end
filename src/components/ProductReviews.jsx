@@ -56,13 +56,13 @@ const ProductReviews = ({ product }) => {
 
   return (
     <div className="mt-8">
-      <div className="flex gap-10 md-lg:flex-col">
+      <div className="flex gap-10  md-lg:flex-col">
         <div className="flex flex-col gap-2 justify-start items-start py-4">
           <div>
             <span className="text-6xl font-semibold">{product?.rating}</span>
             <span className="text-3xl font-semibold text-slate-600">/5</span>
           </div>
-          <div className="flex text-3xl">
+          <div className="flex text-3xl md:w-full">
             <Rating ratings={product.rating} />
           </div>
           <p className="text-sm text-slate-600">({totalReviews}) Reviews</p>
@@ -199,7 +199,7 @@ const ProductReviews = ({ product }) => {
               <span className="text-slate-600">{r.date}</span>
             </div>
             <span className="text-slate-600 text-md">{r.name}</span>
-            <p className="text-slate-600 text-sm">{r.review}</p>
+            <p className="text-slate-600 text-sm ">{r.review}</p>
           </div>
         ))}
         <div className="flex justify-end">
@@ -240,16 +240,16 @@ const ProductReviews = ({ product }) => {
                 value={enterReview}
                 onChange={(e) => setEnterReview(e.target.value)}
                 required
-                className="border outline-0 p-3 w-full"
+                className="border outline-0 p-3 w-full md:w-[280px]"
                 name=""
                 id=""
                 cols="30"
                 rows="5"
               ></textarea>
-              <div className="mt-2">
+              <div className="mt-2 md:flex md:flex-col md:gap-3 md:mb-6 md:w-full">
                 <button className="inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md">
                   {isLoading ? (
-                    <PulseLoader color="white" margin={2} className="mt-1" />
+                    <PulseLoader color="gray" margin={2.5} className="" />
                   ) : (
                     "Submit"
                   )}

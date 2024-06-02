@@ -61,17 +61,6 @@ const ProfileNav = () => {
               <span className="md:hidden">Wishlist</span>
             </NavLink>
           </li>
-          <li className="hover:bg-slate-300 w-full px-4 sm:px-2  transition-all duration-200">
-            <NavLink
-              to="/dashboard/chat"
-              className="flex items-center justify-start gap-3 py-1"
-            >
-              <span>
-                <IoChatbubblesOutline size={20} />
-              </span>
-              <span className="md:hidden">Chat</span>
-            </NavLink>
-          </li>
 
           <li className="hover:bg-slate-300 w-full px-4 sm:px-2  transition-all duration-200">
             <button
@@ -81,7 +70,7 @@ const ProfileNav = () => {
               <span>
                 <AiOutlineLogout size={20} />
               </span>
-              <span className="md:hidden">Log out</span>
+              <span className="md:hidden">Exit</span>
             </button>
           </li>
         </ul>

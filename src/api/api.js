@@ -1,10 +1,8 @@
 import axios from "axios";
-
-const localUrl = "http://localhost:5000";
-const production = "https://multi-vendor-shop.onrender.com";
+import { API_BASE_URL } from "../utils/backendUrl";
 
 const api = axios.create({
-  baseURL: `${production}/api/v1`,
+  baseURL: `${API_BASE_URL}/api/v1`,
 });
 
 export default api;

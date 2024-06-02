@@ -18,32 +18,33 @@ import { SiShopify } from "react-icons/si";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories } from "../store/reducers/homeReducer";
-import {
-  getCustomerCartProducts,
-  getAllMyWishlists,
-} from "../store/reducers/cartReducer";
-import toast from "react-hot-toast";
+import { getCustomerCartProducts } from "../store/reducers/cartReducer";
 
 const Header = () => {
-  const { userInfo } = useSelector((state) => state.customerAuth);
+  const [showBar, setShowBar] = useState(true);
+  const [showCategory, setShowCategory] = useState(true);
+  const { pathname } = useLocation();
+  const [searchValue, setSearchValue] = useState("");
+  const [category, setCategory] = useState();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { userInfo } = useSelector((state) => state.customerAuth);
   const { categories } = useSelector((state) => state.home);
   const { card_product_count, wishlist_count } = useSelector(
     (state) => state.cart
   );
 
   useEffect(() => {
-    dispatch(getCustomerCartProducts(userInfo.id));
-    dispatch(getAllCategories());
-  }, [dispatch, userInfo.id]);
-
-  const [showBar, setShowBar] = useState(true);
-  const [showCategory, setShowCategory] = useState(true);
-  const { pathname } = useLocation();
-
-  const [searchValue, setSearchValue] = useState("");
-  const [category, setCategory] = useState();
+    if (userInfo) {
+      dispatch(getCustomerCartProducts(userInfo.id));
+      dispatch(getAllCategories());
+      console.log("user exist");
+    } else {
+      console.log("user does not exist");
+    }
+  }, [dispatch, userInfo.id, userInfo]);
 
   const searchItem = () => {
     navigate(`/products/search?category=${category}&&value=${searchValue}`);
@@ -57,13 +58,8 @@ const Header = () => {
     }
   };
 
-  useEffect(() => {
-    dispatch(getAllMyWishlists(userInfo.Id));
-    dispatch(getCustomerCartProducts(userInfo.id));
-  }, [dispatch, userInfo]);
-
   return (
-    <div className="w-full bg-white">
+    <header className="w-full bg-white">
       {/* top */}
       <div className="header-top bg-[#caddff] md-lg:hidden">
         <div className="w-[85%] lg:w-[90%] mx-auto">
@@ -344,36 +340,6 @@ const Header = () => {
                   shop
                 </Link>
               </li>
-              {/* <li>
-                <Link
-                  to="/blog"
-                  className={`py-2 block ${
-                    pathname === "/blog" ? "text-[#059473]" : "text-black"
-                  }`}
-                >
-                  blog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/about"
-                  className={`py-2 block ${
-                    pathname === "/about-us" ? "text-[#059473]" : "text-black"
-                  }`}
-                >
-                  about us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="contact"
-                  className={`py-2 block ${
-                    pathname === "/contact" ? "text-[#059473]" : "text-black"
-                  }`}
-                >
-                  contact us
-                </Link>
-              </li> */}
             </ul>
             {/* icons */}
 
@@ -507,8 +473,8 @@ const Header = () => {
                     <select
                       onChange={(e) => setCategory(e.target.value)}
                       className="w-[150px] text-slate-500 font-semibold bg-transparent outline-0 border-none"
-                      name=""
-                      id=""
+                      name="category"
+                      id="category"
                     >
                       <option value="">Select category</option>
                       {categories.map((ctg, ind) => (
@@ -554,7 +520,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

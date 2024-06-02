@@ -21,7 +21,7 @@ const BreadCrumbs = ({
             className="inline-flex items-center text-xl font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
           >
             <TiHome size={iconSize} color={iconColor} />
-            <span className="pl-1 text-black">{fromPage}</span>
+            <span className="pl-1 text-black md:text-[13px]">{fromPage}</span>
           </Link>
         </li>
         <li className="inline-flex items-center">
@@ -34,7 +34,7 @@ const BreadCrumbs = ({
               size={iconSize}
               color={iconColor}
             />
-            <span className="text-black">{toPage}</span>
+            <span className="text-black md:text-[13px]">{toPage}</span>
           </Link>
         </li>
       </ul>

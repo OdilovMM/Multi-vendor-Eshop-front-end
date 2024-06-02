@@ -129,7 +129,7 @@ export const getAllBanners = createAsyncThunk(
       );
       return fulfillWithValue(data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       return rejectWithValue(error.response.data);
     }
   }
@@ -163,22 +163,42 @@ export const homeReducer = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getAllCategories.pending, (state, { payload }) => {
+        state.isLoading = true;
+      })
       .addCase(getAllCategories.fulfilled, (state, { payload }) => {
         state.categories = payload.categories;
+        state.isLoading = false;
+      })
+      .addCase(getAllCategories.rejected, (state, { payload }) => {
+        state.isLoading = false;
+      })
+      .addCase(getProductsByType.pending, (state, { payload }) => {
+        state.isLoading = true;
       })
       .addCase(getProductsByType.fulfilled, (state, { payload }) => {
         state.products = payload.products;
         state.latestProduct = payload.latestProduct;
         state.topRatedProduct = payload.topRatedProduct;
         state.discountProduct = payload.discountProduct;
+        state.isLoading = false;
+      })
+      .addCase(getProductsByType.rejected, (state, { payload }) => {
+        state.isLoading = false;
+      })
+      .addCase(getProductsPriceRange.pending, (state, { payload }) => {
+        state.isLoading = true;
       })
       .addCase(getProductsPriceRange.fulfilled, (state, { payload }) => {
         state.latestProduct = payload.latestProduct;
         state.priceRange = payload.priceRange;
+        state.isLoading = false;
       })
-      .addCase(queryProduct.pending, (state, { payload }) => {
-        state.isLoading = true;
+      //
+      .addCase(getProductsPriceRange.rejected, (state, { payload }) => {
+        state.isLoading = false;
       })
+     
       .addCase(queryProduct.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.products = payload.products;

@@ -5,7 +5,8 @@ import { AiFillStar } from "react-icons/ai";
 import { CiStar } from "react-icons/ci";
 import { Products } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { GridLoader } from "react-spinners";
+import { FadeLoader } from "react-spinners";
+
 import {
   getProductsPriceRange,
   queryProduct,
@@ -18,7 +19,6 @@ const SearchPage = () => {
 
   const searchCategory = searchParams.get("category");
   const searchValue = searchParams.get("value");
-  console.log(searchCategory, searchValue);
 
   const {
     latestProduct,
@@ -85,15 +85,14 @@ const SearchPage = () => {
 
   return (
     <>
-      <div className="bg-[url('http://localhost:3000/images/banner/shop.png')]  h-[220px] mt-6 bg-cover bg-no-repeat bg-left">
+      <div className=" h-[80px] bg-cover bg-no-repeat bg-left">
         <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-black">
-          <h2 className="text-3xl font-bold">Category Page</h2>
-          <div className="flex justify-center items-center gap-2 text-2xl w-full">
+          <div className="flex justify-center items-center gap-2 text-lg w-full">
             <BreadCrumbs
               from="/"
               fromPage="Home"
               to="/shop"
-              iconSize={27}
+              iconSize={20}
               toPage={searchCategory}
               iconColor="black"
             />
@@ -290,11 +289,10 @@ const SearchPage = () => {
                   <div className="flex justify-center items-start gap-3">
                     <button
                       onClick={resetFilter}
-                      className="py-[2px] px-2 border outline-0 bg-slate-300 rounded-sm text-slate-600 font-semibold"
+                      className="inline-flex items-center px-4 py-[6px] bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md"
                     >
-                      Clear Filter
+                      Reset
                     </button>
-
                     <select
                       onChange={(e) => setSortPrice(e.target.value)}
                       className="p-1 border outline-0 text-slate-600 font-semibold"
@@ -312,13 +310,13 @@ const SearchPage = () => {
                 {/* <div className="grid pb-8 gap-4 grid-cols-4 md:grid-cols-3 md:gap-3 md-lg:grid-cols-2  sm:grid-cols-1"> */}
                 {isLoading ? (
                   <div className="flex flex-wrap justify-center items-center mt-[250px]">
-                    <GridLoader margin={3} size={39} />
+                    <FadeLoader margin={3} size={39} />
                   </div>
                 ) : (
                   <div className="flex flex-row gap-[8px] flex-wrap">
-                    {products.map((product, index) => (
-                      <Cart product={product} key={index} />
-                    ))}
+                    {products.map((product, index) => {
+                      return <Cart product={product} key={index} />;
+                    })}
                   </div>
                 )}
                 <div className="flex justify-end">

@@ -7,7 +7,6 @@ import axios from "axios";
 import ok from "../../assets/success.svg";
 import { Link } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
-import api from "../../api/api";
 import { API_BASE_URL } from "../../utils/backendUrl";
 
 const load = async () => {
