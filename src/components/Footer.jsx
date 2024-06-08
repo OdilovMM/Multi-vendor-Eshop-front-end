@@ -38,12 +38,12 @@ const Footer = () => {
 
                 <ul className="flex flex-col gap-2 text-slate-600 text-sm font-semibold">
                   <li className="px-2 py-1 bg-slate-300 rounded-md">
-                    <Link to="https://admin-dashboard-eshop.vercel.app/admin/login">
+                    <Link to="https://admin-dashboard-seven-rust-17.vercel.app">
                       Go to Admin Dashboard{" "}
                     </Link>
                   </li>
                   <li className="px-2 py-1 bg-slate-300 rounded-md">
-                    <Link to="https://admin-dashboard-eshop.vercel.app/login">
+                    <Link to="https://seller-dashboard-iota.vercel.app">
                       Go to Seller Dashboard{" "}
                     </Link>
                   </li>
