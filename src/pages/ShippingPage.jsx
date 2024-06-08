@@ -58,7 +58,7 @@ const ShippingPage = () => {
 
   return (
     <>
-      <div className="bg-[url('http://localhost:3000/images/banner/shop.png')]  h-[220px] mt-6 bg-cover bg-no-repeat bg-left">
+      <div className="  h-[220px] mt-6 bg-cover bg-no-repeat bg-left">
         <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-black">
           <h2 className="text-3xl font-bold">Shipping Page</h2>
           <div className="flex justify-center items-center gap-2 text-2xl w-full">

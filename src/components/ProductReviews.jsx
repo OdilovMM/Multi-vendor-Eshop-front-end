@@ -30,7 +30,7 @@ const ProductReviews = ({ product }) => {
   const handleSubmitReview = (e) => {
     e.preventDefault();
     const userEnteredProductReview = {
-      name: userInfo.name,
+      firstName: userInfo.firstName,
       review: enterReview,
       rating: enterRating,
       productId: product?._id,
@@ -198,7 +198,7 @@ const ProductReviews = ({ product }) => {
               </div>
               <span className="text-slate-600">{r.date}</span>
             </div>
-            <span className="text-slate-600 text-md">{r.name}</span>
+            <span className="text-slate-600 text-md">{r.firstName}</span>
             <p className="text-slate-600 text-sm ">{r.review}</p>
           </div>
         ))}

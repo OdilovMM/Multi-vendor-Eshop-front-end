@@ -1,11 +1,11 @@
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { BreadCrumbs, Cart, Pagination } from "../components";
 import { Range } from "react-range";
 import { AiFillStar } from "react-icons/ai";
 import { CiStar } from "react-icons/ci";
 import { Products } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { FadeLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 import {
   getProductsPriceRange,
   queryProduct,
@@ -336,16 +336,16 @@ const Shop = () => {
                 {/* Products */}
                 {isLoading ? (
                   <div className="flex flex-wrap justify-center items-center mt-[250px]">
-                    <FadeLoader margin={3} size={39} />
+                    <MoonLoader margin={3} size={39} />
                   </div>
                 ) : (
                   <div className="flex flex-row gap-[8px] flex-wrap">
-                    {products.map((product, index) => {
+                    {products?.map((product, index) => {
                       return (
                         <Cart
                           product={product}
                           index={index}
-                          key={product._id}
+                          key={index}
                         />
                       );
                     })}

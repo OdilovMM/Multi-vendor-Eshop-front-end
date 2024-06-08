@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllOrders } from "../../store/reducers/orderReducer";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { FaCreditCard } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 
 const MyOrderPage = () => {
@@ -35,7 +34,7 @@ const MyOrderPage = () => {
 
   return (
     <div>
-      <div className="bg-white shadow-lg p-5 rounded-md min-h-[70vh]">
+      <div className="bg-white shadow-lg p-5 rounded-md min-h-[50vh]">
         <div className="flex justify-between items-center">
           <h2 className="font-medium">My Orders</h2>
           <select
@@ -113,13 +112,9 @@ const MyOrderPage = () => {
                         {myOrd.paymentStatus !== "paid" ? (
                           <button
                             onClick={() => redirectToPay(myOrd)}
-                            className="px-3 py-[2px] rounded-md  flex items-center justify-center"
+                            className="px-3 py-[2px] bg-slate-400 text-white rounded-md  flex items-center justify-center"
                           >
-                            <FaCreditCard
-                              size={18}
-                              title="Pay Now"
-                              color="black"
-                            />
+                            Pay Now
                           </button>
                         ) : (
                           <div className="px-3 py-[2px] rounded-md ">

@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/api";
 import toast from "react-hot-toast";
-import { jwtDecode } from "jwt-decode";
 
 export const placeOrder = createAsyncThunk(
   "order/placeOrder",
@@ -40,7 +39,6 @@ export const placeOrder = createAsyncThunk(
           orderId: data.orderId,
         },
       });
-      console.log(data);
 
       return fulfillWithValue(data);
     } catch (error) {
@@ -67,7 +65,6 @@ export const getAllOrders = createAsyncThunk(
 export const getMyOrderDetails = createAsyncThunk(
   "order/getMyOrderDetails",
   async (orderId, { rejectWithValue, fulfillWithValue }) => {
-    console.log(orderId)
     try {
       const { data } = await api.get(`/order/get-order-detail/${orderId}`, {
         withCredentials: true,
@@ -79,6 +76,8 @@ export const getMyOrderDetails = createAsyncThunk(
     }
   }
 );
+
+
 
 export const orderReducer = createSlice({
   name: "order",
@@ -102,11 +101,11 @@ export const orderReducer = createSlice({
       })
       .addCase(getAllOrders.fulfilled, (state, { payload }) => {
         state.loader = false;
-        state.myOrders = payload.orders;
+        state.myOrders = payload.data.orders;
       })
       .addCase(getMyOrderDetails.fulfilled, (state, { payload }) => {
         state.loader = false;
-        state.myOrder = payload.myOrder;
+        state.myOrder = payload.data.myOrder;
       });
   },
 });

@@ -1,40 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/api";
 import toast from "react-hot-toast";
-import { jwtDecode } from "jwt-decode";
-
-export const getCustomerCartProducts = createAsyncThunk(
-  "cart/getCustomerCartProducts",
-  async (userId, { rejectWithValue, fulfillWithValue }) => {
-    try {
-      const { data } = await api.get(`/cart/get-customer-cart/${userId}`, {
-        withCredentials: true,
-      });
-
-      return fulfillWithValue(data);
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const addToCart = createAsyncThunk(
-  "cart/addToCart",
-  async (id, { rejectWithValue, fulfillWithValue }) => {
-    try {
-      const { data } = await api.post(`/cart/add-cart`, id, {
-        withCredentials: true,
-      });
-
-      return fulfillWithValue(data);
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
 
 export const deleteProductFromCart = createAsyncThunk(
-  "cart/removeFromCart",
+  "del/removeFromCart",
   async (id, { rejectWithValue, fulfillWithValue }) => {
     try {
       const { data } = await api.delete(
@@ -52,11 +21,11 @@ export const deleteProductFromCart = createAsyncThunk(
 );
 
 export const incrementProductQuantity = createAsyncThunk(
-  "cart/incrementProductQuantity",
+  "incr/incrementProductQuantity",
   async (productId, { rejectWithValue, fulfillWithValue }) => {
     try {
       const { data } = await api.patch(
-        `/cart/increment-product-of-cart/${productId}`,
+        `/customer/increment-cart-quantity/${productId}`,
         {
           withCredentials: true,
         }
@@ -68,11 +37,11 @@ export const incrementProductQuantity = createAsyncThunk(
   }
 );
 export const decrementProductQuantity = createAsyncThunk(
-  "cart/decrementProductQuantity",
+  "dec/decrementProductQuantity",
   async (productId, { rejectWithValue, fulfillWithValue }) => {
     try {
       const { data } = await api.patch(
-        `/cart/decrement-product-of-cart/${productId}`,
+        `/customer/decrement-cart-quantity/${productId}`,
         {
           withCredentials: true,
         }
@@ -84,11 +53,29 @@ export const decrementProductQuantity = createAsyncThunk(
   }
 );
 
-export const addToWishlist = createAsyncThunk(
-  "wishlist/addToWishlist",
-  async (info, { rejectWithValue, fulfillWithValue }) => {
+export const addRemoveWishlist = createAsyncThunk(
+  "wishlist/addRemoveWishlist",
+  async (productId, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.post("/cart/add-wishlist", info, {
+      const { data } = await api.post(
+        "/customer/add-remove-wishlist",
+        { productId },
+        {
+          withCredentials: true,
+        }
+      );
+
+      return fulfillWithValue(data);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const addRemoveCart = createAsyncThunk(
+  "cart/addRemoveCart",
+  async (productId, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.post("/customer/add-remove-cart", productId, {
         withCredentials: true,
       });
 
@@ -98,11 +85,12 @@ export const addToWishlist = createAsyncThunk(
     }
   }
 );
-export const getAllMyWishlists = createAsyncThunk(
-  "wishlist/getAllMyWishlists",
-  async (userId, { rejectWithValue, fulfillWithValue }) => {
+
+export const getMyWishlist = createAsyncThunk(
+  "wishlist/getMyWishlist",
+  async (_, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.get(`/cart/get-all-wishlist/${userId}`, {
+      const { data } = await api.get(`/customer/get-my-wishlist`, {
         withCredentials: true,
       });
 
@@ -112,11 +100,11 @@ export const getAllMyWishlists = createAsyncThunk(
     }
   }
 );
-export const removeWishlist = createAsyncThunk(
-  "wishlist/removeWishlist",
-  async (wishlistId, { rejectWithValue, fulfillWithValue }) => {
+export const getMyCart = createAsyncThunk(
+  "cart/getMyCart",
+  async (_, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.delete(`/cart/remove-wishlist/${wishlistId}`, {
+      const { data } = await api.get(`/customer/get-my-cart`, {
         withCredentials: true,
       });
 
@@ -131,16 +119,17 @@ export const cartReducer = createSlice({
   name: "cart",
   initialState: {
     loading: false,
-    card_products: [],
-    card_product_count: 0,
+    success: false,
     wishlist_count: 0,
     wishlist: [],
+    cardProducts: [],
     price: 0,
-    errorMessage: "",
-    successMessage: "",
-    shipping_fee: 0,
-    outofstock_products: [],
-    buy_product_item: 0,
+    cardProductCount: 0,
+    shippingFee: 0,
+    outOfStockProducts: [],
+    buyProductItem: 0,
+
+ 
   },
   reducers: {
     messageClear: (state, _) => {
@@ -148,81 +137,91 @@ export const cartReducer = createSlice({
       state.successMessage = "";
     },
     resetCount: (state, _) => {
-      state.wishlist_count = 0;
-      state.card_product_count = 0;
+      state.wishlist_count = "";
+      state.cardProductCount = "";
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(addToCart.rejected, (state, { payload }) => {
-        toast.error(payload.error);
-        state.errorMessage = payload.error;
-      })
-      .addCase(addToCart.fulfilled, (state, { payload }) => {
-        state.card_product_count = state.card_product_count + 1;
-        toast.success(payload.message);
-        state.successMessage = payload.message;
-      })
-      .addCase(getCustomerCartProducts.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.card_products = payload.card_products;
-        state.price = payload.price;
-        state.card_product_count = payload.card_product_count;
-        state.shipping_fee = payload.shipping_fee;
-        state.outofstock_products = payload.outOfStockProduct;
-        state.buy_product_item = payload.buy_product_item;
-      })
-      .addCase(getCustomerCartProducts.rejected, (state, { payload }) => {
-        state.loading = false;
-      })
       .addCase(deleteProductFromCart.fulfilled, (state, { payload }) => {
         state.successMessage = payload.message;
       })
       .addCase(incrementProductQuantity.fulfilled, (state, { payload }) => {
-        state.successMessage = payload.message;
+        state.success = true;
       })
       .addCase(decrementProductQuantity.fulfilled, (state, { payload }) => {
-        state.successMessage = payload.message;
+        state.success = true;
       })
-      .addCase(addToWishlist.pending, (state, { payload }) => {
+      // add ti wishlist and remove from wishlist
+      .addCase(addRemoveWishlist.pending, (state, { payload }) => {
+        state.loading = true;
+        state.success = false;
+      })
+      .addCase(addRemoveWishlist.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.success = true;
+
+        if (payload.data.isSaved === false) {
+          state.wishlist = state.wishlist.filter(
+            (item) => item._id !== payload.data.savedWishlist._id
+          );
+        } else {
+          state.wishlist.push(payload.data.savedWishlist);
+        }
+      })
+      .addCase(addRemoveWishlist.rejected, (state, { payload }) => {
+        state.loading = false;
+        toast.error(payload.message);
+        state.success = false;
+      })
+      // get all my wishlist
+      .addCase(getMyWishlist.pending, (state, { payload }) => {
         state.loading = true;
       })
-      .addCase(addToWishlist.fulfilled, (state, { payload }) => {
+      .addCase(getMyWishlist.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.successMessage = payload.message;
-        state.wishlist_count =
-          state.wishlist_count > 0 ? state.wishlist_count + 1 : 1;
-        toast.success(payload.message);
+        state.wishlist = payload.data.wishlistArray;
+        state.wishlist_count = payload.data.wishlistArrayCount;
       })
-      .addCase(addToWishlist.rejected, (state, { payload }) => {
+      .addCase(getMyWishlist.rejected, (state, { payload }) => {
         state.loading = false;
-        state.errorMessage = payload.message;
-        toast.error(payload.error);
       })
-      .addCase(getAllMyWishlists.pending, (state, { payload }) => {
+      // add to cart and remove from cart
+      .addCase(addRemoveCart.pending, (state, { payload }) => {
+        state.loading = true;
+        state.success = false;
+      })
+      .addCase(addRemoveCart.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        toast.success(payload.status);
+        state.success = true;
+        if (payload.data.isSaved === false) {
+          state.cardProducts = state.cardProducts.filter(
+            (item) => item._id !== payload.data.savedCart._id
+          );
+        } else {
+          state.cardProducts.push(payload.data.savedCart);
+        }
+      })
+      .addCase(addRemoveCart.rejected, (state, { payload }) => {
+        state.loading = false;
+        toast.error(payload.message);
+        state.success = false;
+      })
+      // Get my cart products
+      .addCase(getMyCart.pending, (state, { payload }) => {
         state.loading = true;
       })
-      .addCase(getAllMyWishlists.fulfilled, (state, { payload }) => {
+      .addCase(getMyCart.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.wishlist = payload.wishlist;
-        state.wishlist_count = payload.wishlistCount;
+        state.cardProducts = payload.data.cardProducts;
+        state.price = payload.data.price;
+        state.cardProductCount = payload.data.cardProductCount;
+        state.shippingFee = payload.data.shippingFee;
+        state.outOfStockProducts = payload.data.outOfStockProduct;
+        state.buyProductItem = payload.data.buyProductItem;
       })
-      .addCase(getAllMyWishlists.rejected, (state, { payload }) => {
-        state.loading = false;
-      })
-      .addCase(removeWishlist.pending, (state, { payload }) => {
-        state.loading = true;
-      })
-      .addCase(removeWishlist.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.wishlist = state.wishlist.filter(
-          (p) => p._id !== payload.wishlistId
-        );
-        console.log(payload);
-        state.wishlist_count = state.wishlist_count - 1;
-        toast.success(payload.message);
-      })
-      .addCase(removeWishlist.rejected, (state, { payload }) => {
+      .addCase(getMyCart.rejected, (state, { payload }) => {
         state.loading = false;
       });
   },

@@ -10,7 +10,6 @@ import {
   ProductReviews,
   Rating,
 } from "../components";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { FaArrowTrendDown } from "react-icons/fa6";
@@ -19,9 +18,10 @@ import { MdEventAvailable } from "react-icons/md";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getProductDetail } from "../store/reducers/homeReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../store/reducers/cartReducer";
 import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 import { IoBagAddSharp } from "react-icons/io5";
+import { ImageSlider } from "../components";
+import { addRemoveCart } from "../store/reducers/cartReducer";
 
 const ProductDetail = () => {
   const [image, setImage] = useState("");
@@ -46,37 +46,6 @@ const ProductDetail = () => {
 
   const stock = 2;
 
-  const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 6,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 6,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 4,
-    },
-    mdtablet: {
-      breakpoint: { max: 991, min: 464 },
-      items: 3,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 3,
-    },
-    smmobile: {
-      breakpoint: { max: 640, min: 0 },
-      items: 3,
-    },
-    xsmobile: {
-      breakpoint: { max: 440, min: 0 },
-      items: 3,
-    },
-  };
-
   const increment = () => {
     if (qty >= product.stock) {
       setAlarm(true);
@@ -94,7 +63,7 @@ const ProductDetail = () => {
   const handleAddToCart = (id) => {
     if (userInfo) {
       dispatch(
-        addToCart({
+        addRemoveCart({
           userId: userInfo.id,
           quantity: qty,
           productId: product._id,
@@ -156,43 +125,8 @@ const ProductDetail = () => {
 
       <div className="w-[85%] py-4 md:w-[320px] sm:w-[90%] lg:w-[90%] mt-3 h-full mx-auto">
         <div className="grid grid-cols-2 md-lg:grid-cols-1 gap-8">
-          <div className="w-[450px] md:w-[320px]">
-            {/* product main image */}
-            <div className=" border md:h-[300px] md:max-w-[290px] h-[600px] w-[550px] shadow-lg rounded-md overflow-hidden ">
-              <img
-                className="object-center"
-                src={image ? image : product?.images?.[0]}
-                alt=""
-              />
-            </div>
-            {/* product carousel */}
-            <div className="py-3 md-lg:w-[300px]">
-              {product?.images && (
-                <Carousel
-                  autoPlay={false}
-                  infinite={true}
-                  responsive={responsive}
-                  draggable={false}
-                  transitionDuration={500}
-                >
-                  {product?.images?.map((img, i) => {
-                    return (
-                      <div
-                        key={i}
-                        className="h-[100px] border-b mx-1 md:h-[80px] md:w-[80px]"
-                        onClick={() => setImage(img)}
-                      >
-                        <img
-                          className=" cursor-pointer object-center hover:scale-110"
-                          src={img}
-                          alt=""
-                        />
-                      </div>
-                    );
-                  })}
-                </Carousel>
-              )}
-            </div>
+          <div className="">
+            <ImageSlider images={product?.images} />
           </div>
           <div className="flex flex-col gap-5">
             <div className="text-3xl capitalize text-slate-400 font-bold">
@@ -268,7 +202,7 @@ const ProductDetail = () => {
                       >
                         <BiSolidDownArrow color="blue" size={18} />
                       </button>
-                      <span className="w-[55px]  text-center inline-flex items-center px-4 py-[11px] bg-gray-200  text-gray-800 text-sm font-medium rounded-md">
+                      <span className="w-[55px]  inline-flex items-center justify-center py-[11px] bg-gray-200  text-gray-800 text-sm font-medium rounded-md">
                         {" "}
                         {qty}
                       </span>
@@ -354,7 +288,7 @@ const ProductDetail = () => {
 
       <div className="w-[85%] py-4 md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto pb-12">
         <div className="flex flex-wrap">
-          <div className="w-[72%] md-lg::w-full">
+          <div className="w-[79%] md-lg::w-full">
             <div className="pr-4 md-lg:pr-0">
               <div className="grid grid-cols-2 gap-1">
                 <button
@@ -389,11 +323,13 @@ const ProductDetail = () => {
             </div>
           </div>
           {/* related products from shop */}
-          <div className="w-[28%] md-lg:w-full">
+          <div className="w-[21%] md-lg:w-full">
             {sellerRelatedProducts && (
               <div className="pl-4 md-lg:pl-0">
-                <div className="px-3 py-2 text-slate-600 bg-slate-200">
-                  <h2 className="font-bold">From {product?.shopName}</h2>
+                <div className="px-3 py-2 text-slate-600 bg-slate-200 rounded-md">
+                  <h2 className="font-bold">
+                    Products from {product?.shopName}
+                  </h2>
                 </div>
                 <div className="flex flex-col md:flex-wrap md:flex-row gap-5 mt-3 border p-3">
                   {sellerRelatedProducts ? (

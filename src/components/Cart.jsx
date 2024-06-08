@@ -1,101 +1,106 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AiFillHeart, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai";
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import Rating from "./Rating";
-import saleIcon from "./../assets/icon/icons8-sale.gif";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, addToWishlist } from "../store/reducers/cartReducer";
-import toast from "react-hot-toast";
+import {
+  addRemoveWishlist,
+  addRemoveCart,
+  getMyCart,
+} from "../store/reducers/cartReducer";
+import { IoBagAdd } from "react-icons/io5";
 
 const Cart = ({ product, index }) => {
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.customerAuth);
+  const { wishlist, success, cardProducts } = useSelector(
+    (state) => state.cart
+  );
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const [isInCart, setIsInCart] = useState(false);
 
-  const handleAddWishlist = (product) => {
-    if (userInfo) {
-      dispatch(
-        addToWishlist({
-          userId: userInfo.id,
-          productId: product._id,
-          name: product.name,
-          brand: product.brand,
-          category: product.category,
-          description: product.description,
-          discount: product.discount,
-          images: product.images,
-          price: product.price,
-          rating: product.rating,
-          shopName: product.shopName,
-          slug: product.slug,
-          stock: product.stock,
-        })
-      );
-    } else {
-      toast.error("Login First");
+  useEffect(() => {
+    // Check if the product is already in the wishlist
+    const inWishlist = wishlist.some(
+      (item) => item.productId._id === product._id
+    );
+    setIsInWishlist(inWishlist);
+  }, [wishlist, product._id]);
+
+  useEffect(() => {
+    // Check if the product is already in the Cart
+    const inCart = cardProducts?.some((cart) =>
+      cart?.products?.some((item) => item?.productInfo?._id === product?._id)
+    );
+    setIsInCart(inCart);
+  }, [isInCart, cardProducts, product?._id]);
+
+  const handleAddRemoveWishlist = (productId) => {
+    dispatch(addRemoveWishlist(productId));
+  };
+
+  const handleAddRemoveCart = (id) => {
+    dispatch(
+      addRemoveCart({
+        quantity: 1,
+        productId: id,
+      })
+    );
+    if (success) {
+      dispatch(getMyCart());
     }
   };
 
-  const handleAddToCart = (id) => {
-    if (userInfo) {
-      dispatch(
-        addToCart({
-          userId: userInfo.id,
-          quantity: 1,
-          productId: id,
-        })
-      );
-    } else {
-      toast.error("Please, Login first");
+  useEffect(() => {
+    if (success) {
+      dispatch(getMyCart());
     }
-  };
-  
+  }, [dispatch, success]);
+
   return (
     <>
       <div
         key={index}
-        className="w-[232px] h-[400px] flex flex-col justify-between md:w-[260px] overflow-hidden border-[0.5px] border-grey-200 md-lg:w-[290px] group  rounded-[6px] shadow-md  relative cursor-pointer"
+        className="w-[232px] h-[410px] flex flex-col justify-between md:w-[260px] overflow-hidden border-[0.5px] border-grey-200 md-lg:w-[290px] group  rounded-[6px] shadow-md  relative cursor-pointer"
       >
         <div className="relative h-[300px] overflow-hidden   ">
           <Link className=" h-full w-full   flex justify-center items-center transition-transform duration-500 transform lg:scale-105 :scale-105 xl:scale-105 group-hover:scale-110">
             <img
               src={product?.images[0]}
               alt={product?.name}
-              className="h-full w-full object-contain "
+              className="h-full w-full object-contain shadow-lg "
             />
           </Link>
           {/* sale */}
-          <div className="flex flex-col  absolute top-0 gap-3 ">
-            {product?.discount > 0 ? (
-              <>
-                <img src={saleIcon} alt="" className="h-[35px] p-1" />
-              </>
-            ) : (
-              <span className="bg-red-500 text-[12px] shadow-sm pl-2"></span>
-            )}
-
+          <div className="flex flex-col  absolute top-[-11px] left-[-7px] gap-3 ">
             {product?.discount ? (
-              <span className="bg-black text-white px-2 shadow-sm text-[10px]">
-                -{product?.discount}%
+              <span className="bg-blue-700 font-semibold text-[16px] rounded-br-full text-white px-4 py-5 shadow-sm ">
+                - {product?.discount}
+                <span className="text-[10px] transform -rotate-50">%</span>
               </span>
             ) : (
               <></>
             )}
           </div>
           {/* link */}
-          <div className="absolute top-2 right-1 flex flex-col gap-2 transform translate-x-9  opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition duration-500">
+          <div className="absolute top-2 right-1 flex flex-col gap-3  opacity-100   transition duration-500">
             <button
-              onClick={() => handleAddWishlist(product)}
-              className="p-2 bg-white  hover:bg-pink-500 transition ease-in-out"
+              onClick={() => handleAddRemoveWishlist(product._id)}
+              className="p-1 bg-white   transition ease-in-out rounded-full flex justify-center items-center"
             >
-              <AiFillHeart color="red" size={22} />
-
+              {/* <IoHeartOutline size={25} /> */}
+              {isInWishlist ? (
+                <IoHeart size={25} color="blue" />
+              ) : (
+                <IoHeartOutline size={25} />
+              )}
               {/* <AiOutlineHeart size={22} /> */}
             </button>
             <Link
               to={`/product/details/${product?.slug}`}
-              className="p-2 bg-white  hover:bg-pink-500 transition ease-in-out"
+              className="p-1 bg-white   transition ease-in-out rounded-full flex justify-center items-center"
             >
-              <AiOutlineEye size={22} />
+              <AiOutlineEye size={25} />
             </Link>
           </div>
 
@@ -104,18 +109,22 @@ const Cart = ({ product, index }) => {
             style={{
               zIndex: "1",
             }}
-            className="absolute  bottom-0 w-full transform translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition duration-500"
+            className="absolute bottom-[1px] left-[193px] w-full transform "
           >
             <button
-              onClick={() => handleAddToCart(product?._id)}
-              className="flex h-[40px] bg-[#5b5555] hover:bg-[#141111] transition duration-900 ease-in-out w-full flex-row gap-2 items-center justify-center"
+              onClick={() => handleAddRemoveCart(product?._id)}
+              className="flex bg-white rounded-full p-[5px] items-center justify-center"
             >
-              <span className="text-white font-Poppins">Add To Cart</span>
+              {isInCart ? (
+                <IoBagAdd size={25} color="blue" />
+              ) : (
+                <IoBagAdd size={25} color="green" />
+              )}
             </button>
           </div>
         </div>
         {/* bottom info */}
-        <div className="flex flex-col h-[100px] overflow-hidden bg-[#fefdfe] ">
+        <div className="flex flex-col h-[115px] overflow-hidden bg-[#fbf7fb] ">
           <div className="px-3 py-3">
             <h2>{product?.name.slice(0, 10)}...</h2>
             <div className="flex flex-row items-center justify-between">
@@ -143,6 +152,9 @@ const Cart = ({ product, index }) => {
                 {product?.shopName}
               </h2>
             </div>
+            <h2 className="text-green-600 font-semibold mb-1">
+              {product?.category}
+            </h2>
           </div>
         </div>
       </div>

@@ -15,6 +15,7 @@ import StripePayment from "./StripePayment";
 import ProfileNav from "./profile/ProfileNav";
 import OrderDetails from "./profile/OrderDetails";
 import Checkout from "./Checkout";
+import ImageSlider from "./ImageSlider";
 
 
 export {
@@ -34,5 +35,6 @@ export {
   StripePayment,
   ProfileNav,
   OrderDetails,
-  Checkout
+  Checkout,
+  ImageSlider
 };

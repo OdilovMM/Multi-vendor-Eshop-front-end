@@ -31,15 +31,15 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate("/");
+      navigate("/dashboard/my-orders");
     } else {
       return;
     }
   }, [dispatch, navigate, userInfo]);
 
   return (
-    <div className="min-w-screen h-full py-9 my-5  flex items-center justify-center">
-      <div className="w-[350px] text-[#fffFFF] bg-[#ecf0ef] shadow-xl p-7 rounded-md">
+    <div className="min-w-screen  min-h-[70vh] py-9 my-5  flex items-center justify-center">
+      <div className="w-[350px] text-[#fffFFF] bg-[#ecf0ef] shadow-2xl border border-blue-700 p-7 rounded-md">
         <h2 className="text-xl text-black mb-3 font-bold">Login</h2>
 
         <form className="space-y-6" onSubmit={handleSubmitData}>
@@ -102,7 +102,7 @@ const LoginPage = () => {
             <button
               disabled={loader ? true : false}
               type="submit"
-              className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700"
+              className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium  bg-blue-700 hover:bg-blue-600 transition-all duration-300 rounded-lg"
             >
               {loader ? (
                 <ScaleLoader color="#fff" height={22} width={5} radius={2} />

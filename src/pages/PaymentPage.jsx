@@ -43,6 +43,32 @@ const PaymentPage = () => {
                     <span className="text-slate-600">Cash</span>
                   </div>
                 </div>
+                <div className="my-2">
+                  <h2 className="my-2 text-2xl text-gray-500 uppercase font-bold">
+                    Demo Stripe Credit Card for Testing purposes
+                  </h2>
+
+                  <div className="flex justify-start gap-3">
+                    <h2 className="font-bold">Email:</h2>
+                    <span>Type any random email</span>
+                  </div>
+                  <div className="flex justify-start gap-3">
+                    <h2 className="font-bold">Card Number:</h2>
+                    <span>4242 4242 4242 4242</span>
+                  </div>
+                  <div className="flex justify-start gap-3">
+                    <h2 className="font-bold">Expiration:</h2>
+                    <span>06/29</span>
+                  </div>
+                  <div className="flex justify-start gap-3">
+                    <h2 className="font-bold">CVC:</h2>
+                    <span>006</span>
+                  </div>
+                  <div className="flex justify-start gap-3">
+                    <h2 className="font-bold">Country:</h2>
+                    <span>Any</span>
+                  </div>
+                </div>
               </div>
 
               <div>

@@ -8,7 +8,6 @@ import {
   FaGithub,
   FaLock,
   FaList,
-  FaPhoneAlt,
 } from "react-icons/fa";
 import { IoLanguageSharp } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -18,7 +17,7 @@ import { SiShopify } from "react-icons/si";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories } from "../store/reducers/homeReducer";
-import { getCustomerCartProducts } from "../store/reducers/cartReducer";
+import { getMyCart } from "../store/reducers/cartReducer";
 
 const Header = () => {
   const [showBar, setShowBar] = useState(true);
@@ -32,17 +31,15 @@ const Header = () => {
 
   const { userInfo } = useSelector((state) => state.customerAuth);
   const { categories } = useSelector((state) => state.home);
-  const { card_product_count, wishlist_count } = useSelector(
+  const { cardProductCount, wishlist_count } = useSelector(
     (state) => state.cart
   );
 
+  // cardProductCount
   useEffect(() => {
     if (userInfo) {
-      dispatch(getCustomerCartProducts(userInfo.id));
+      dispatch(getMyCart());
       dispatch(getAllCategories());
-      console.log("user exist");
-    } else {
-      console.log("user does not exist");
     }
   }, [dispatch, userInfo.id, userInfo]);
 
@@ -61,10 +58,10 @@ const Header = () => {
   return (
     <header className="w-full bg-white">
       {/* top */}
-      <div className="header-top bg-[#caddff] md-lg:hidden">
+      <div className="header-top bg-gray-700 md-lg:hidden">
         <div className="w-[85%] lg:w-[90%] mx-auto">
-          <div className="flex w-full justify-between items-center h-[50px] text-black">
-            <ul className="flex justify-start items-center gap-6 font-semibold text-black">
+          <div className="flex w-full justify-between items-center h-[50px]">
+            <ul className="flex justify-start items-center gap-6 font-semibold text-white">
               <li className="flex relative justify-center items-center gap-2 text-sm ">
                 <span>
                   <MdAddIcCall size={18} />
@@ -76,20 +73,20 @@ const Header = () => {
               <div className="flex justify-center items-center gap-8">
                 <div className="flex justify-center items-center gap-4 text-black">
                   <Link to="https://github.com/OdilovMM">
-                    <MdFacebook size={18} />
+                    <MdFacebook size={22} color="white" />
                   </Link>
                   <Link to="https://t.me/Makhmudovichk">
-                    <FaTelegram size={18} />
+                    <FaTelegram size={22} color="white" />
                   </Link>
                   <Link to="https://github.com/OdilovMM">
-                    <FaLinkedin size={18} />
+                    <FaLinkedin size={22} color="white" />
                   </Link>
                   <Link to="https://github.com/OdilovMM">
-                    <FaGithub size={18} />
+                    <FaGithub size={22} color="white" />
                   </Link>
                 </div>
                 {/* language */}
-                <div className="flex group cursor-pointer text-slate-600 text-sm justify-center items-center gap-1 relative after:h-[18px] after:w-[1px] after:bg-[#afafaf] after:-right-[16px] after:absolute before:absolute before:h-[18px] before:bg-[#afafaf] before:w-[1px] before:-left-[20px]">
+                <div className="flex group cursor-pointer text-white  text-sm justify-center items-center gap-1 relative after:h-[18px] after:w-[1px] after:bg-[#afafaf] after:-right-[16px] after:absolute before:absolute before:h-[18px] before:bg-[#afafaf] before:w-[1px] before:-left-[20px]">
                   <IoLanguageSharp size={18} />
                   <span>
                     <IoIosArrowDown />
@@ -110,9 +107,9 @@ const Header = () => {
                     >
                       <span>
                         {" "}
-                        <FaUserCircle />{" "}
+                        <FaUserCircle color="white" size={22} />{" "}
                       </span>
-                      <span>{userInfo.name.split(" ")[0]}</span>
+                      <span className="text-white">{userInfo?.firstName}</span>
                     </Link>
                   </>
                 ) : (
@@ -123,9 +120,9 @@ const Header = () => {
                     >
                       <span>
                         {" "}
-                        <FaLock />{" "}
+                        <FaLock color="white" />{" "}
                       </span>
-                      <span>Login</span>
+                      <span className="text-white">Login</span>
                     </Link>
                   </>
                 )}
@@ -178,40 +175,6 @@ const Header = () => {
                       shop
                     </Link>
                   </li>
-                  {/* <li>
-                    <Link
-                      to="/blog"
-                      className={`p-2 block ${
-                        pathname === "/blog" ? "text-[#059473]" : "text-black"
-                      }`}
-                    >
-                      blog
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/about"
-                      className={`p-2 block ${
-                        pathname === "/about-us"
-                          ? "text-[#059473]"
-                          : "text-black"
-                      }`}
-                    >
-                      about us
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/contact"
-                      className={`p-2 block ${
-                        pathname === "/contact"
-                          ? "text-[#059473]"
-                          : "text-black"
-                      }`}
-                    >
-                      contact us
-                    </Link>
-                  </li> */}
                 </ul>
 
                 <div className="flex md-lg:hidden justify-center items-center gap-5">
@@ -220,13 +183,13 @@ const Header = () => {
                       onClick={() =>
                         navigate(userInfo ? "/dashboard/my-wishlist" : "/login")
                       }
-                      className="relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]"
+                      className="relative flex justify-center hover:bg-[#bdc9c5] hover:text-white  items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]"
                     >
-                      <span className="text-xl text-green-500">
+                      <span className="text-xl  text-green-500">
                         <IoHeart color="black" />
                       </span>
                       {wishlist_count > 0 && (
-                        <div className="w-[20px] h-[20px] absolute bg-red-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px] ">
+                        <div className="w-[20px]  h-[20px] absolute bg-red-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px] ">
                           {wishlist_count}
                         </div>
                       )}
@@ -234,16 +197,16 @@ const Header = () => {
 
                     <div
                       onClick={redirectCart}
-                      className="relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]"
+                      className="relative flex hover:bg-[#bdc9c5] hover:text-white  justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]"
                     >
                       <span className="text-xl text-green-500">
                         <Link>
                           <SiShopify color="black" />
                         </Link>
                       </span>
-                      {card_product_count > 0 && (
+                      {cardProductCount > 0 && (
                         <div className="w-[20px] h-[20px] absolute bg-red-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px] ">
-                          {card_product_count}
+                          {cardProductCount}
                         </div>
                       )}
                     </div>
@@ -281,7 +244,7 @@ const Header = () => {
                 </span>
 
                 <ul className="absolute invisible transition-all top-12 rounded-sm duration-200 text-white p-2 w-[75px] flex flex-col gap-3 group-hover:visible group-hover:top-6 group-hover:bg-[#8eaebb] z-10">
-                  <li>Uzb</li>
+                  <li className="hover:bg-slate-200">Uzb</li>
                   <li>Eng</li>
                   <li>Kor</li>
                 </ul>
@@ -298,7 +261,7 @@ const Header = () => {
                         {" "}
                         <FaUserCircle />{" "}
                       </span>
-                      <span>{userInfo.name.split(" ")[0]}</span>
+                      <span>{userInfo?.firstName}</span>
                     </Link>
                   </>
                 ) : (
@@ -383,9 +346,9 @@ const Header = () => {
                 <span className="text-xl text-green-500">
                   <IoHeart color="black" />
                 </span>
-                {card_product_count !== 0 && (
+                {cardProductCount !== 0 && (
                   <div className="w-[20px] h-[20px] absolute bg-red-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px] ">
-                    {card_product_count}
+                    {cardProductCount}
                   </div>
                 )}
               </div>
@@ -398,7 +361,7 @@ const Header = () => {
                   <SiShopify color="black" />
                 </span>
                 <div className="w-[20px] h-[20px] absolute bg-red-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px] ">
-                  {card_product_count}
+                  {cardProductCount}
                 </div>
               </div>
             </div>
@@ -408,15 +371,15 @@ const Header = () => {
 
       {/* bottom header */}
 
-      <div className="w-[85%] lg:w-[90%] mx-auto">
-        <div className="flex w-full flex-wrap md-lg:gap-8">
-          <div className="w-3/12 md-lg:w-full">
-            <div className="bg-white relative">
+      <div className="w-[85%] lg:w-[90%] mx-auto ">
+        <div className="flex w-full flex-wrap  md-lg:gap-8">
+          <div className="w-3/12 md-lg:w-full ">
+            <div className="bg-blue-700   relative">
               <div
                 onClick={() => setShowCategory(!showCategory)}
-                className="h-[50px] bg-[#059473] text-white flex justify-center md-lg:justify-between md-lg:px-6 items-center gap-3 font-bold text-md cursor-pointer"
+                className="h-[50px] bg-blue-700  hover:bg-blue-600 transition-all duration-300 text-white flex justify-center md-lg:justify-between md-lg:px-6 items-center gap-3 font-bold text-md cursor-pointer"
               >
-                <div className="flex justify-center items-center gap-3">
+                <div className="flex justify-center  items-center gap-3">
                   <span>
                     <FaList />
                   </span>
@@ -434,26 +397,26 @@ const Header = () => {
               </div>
               <div
                 className={`${
-                  showCategory ? "h-0" : "h-[550px]"
-                } overflow-hidden transition-all md-lg:relative duration-100 absolute z-[99999] bg-[#f1fafa] w-full border-x`}
+                  showCategory ? "h-0" : "h-[500px]"
+                } overflow-hidden transition-all md-lg:relative duration-100 absolute z-[99999] bg-[#c4d3d5fe] w-full border-x`}
               >
                 <ul className="py-2 text-slate-600 overflow-y-scroll h-full font-semibold uppercase">
                   {categories?.map((cat, index) => {
                     return (
                       <li
                         key={index}
-                        className="flex items-center hover:bg-slate-400 transition-all duration-300 hover:text-white  gap-2 justify-start px-2 py-[3px]"
+                        className="flex items-center hover:bg-slate-500 transition-all duration-300 hover:text-white  gap-2 justify-start px-2 py-[3px]"
                       >
-                        <img
-                          src={cat.image}
-                          alt=""
-                          className="h-[33px] w-[33px] rounded-full object-fit"
-                        />
                         <Link
                           onClick={() => setShowCategory(!showCategory)}
                           to={`/products?category=${cat.name}`}
-                          className="text-sm block capitalize"
+                          className="text-sm flex items-center justify-between capitalize w-full h-full"
                         >
+                          <img
+                            src={cat.image}
+                            alt=""
+                            className="h-[33px] w-[33px] rounded-full object-fit"
+                          />
                           {cat.name}
                         </Link>
                       </li>
@@ -468,15 +431,15 @@ const Header = () => {
           <div className="w-9/12 pl-8 md-lg:pl-0 md-lg:w-full">
             <div className="flex flex-wrap w-full justify-between items-center md-lg:gap-6">
               <div className="w-8/12 md-lg:w-full">
-                <div className="flex border h-[50px] items-center relative gap-5">
+                <div className="flex border rounded-lg h-[50px] items-center relative gap-5">
                   <div className="relative after:absolute after:h-[25px] after:w-[1px] after:bg-[#afafaf] after:-right-[15px] md-lg:hidden">
                     <select
                       onChange={(e) => setCategory(e.target.value)}
-                      className="w-[150px] text-slate-500 font-semibold bg-transparent outline-0 border-none"
+                      className="w-[150px] text-slate-500 pl-2 font-semibold bg-transparent outline-0 border-none"
                       name="category"
                       id="category"
                     >
-                      <option value="">Select category</option>
+                      <option value="">Category</option>
                       {categories.map((ctg, ind) => (
                         <option key={ind} value={ctg.name}>
                           {ctg.name}{" "}
@@ -488,15 +451,15 @@ const Header = () => {
                   <input
                     onChange={(e) => setSearchValue(e.target.value)}
                     type="text"
-                    name=""
-                    id=""
+                    name="value"
+                    id="value"
                     placeholder="What are you looking for..."
                     className="w-full relative bg-transparent text-slate-500 outline-0 px-3 h-full"
                   />
 
                   <button
                     onClick={searchItem}
-                    className="bg-[#059473] right-0 absolute px-8 h-full font-semibold uppercase text-white"
+                    className="bg-blue-700 hover:bg-blue-600 transition-all duration-300 rounded-lg right-0 absolute px-8 h-full font-semibold uppercase text-white"
                   >
                     Search
                   </button>
@@ -504,18 +467,7 @@ const Header = () => {
               </div>
 
               {/*  */}
-              <div className="w-4/12 block md-lg:hidden pl-2 md-lg:w-full md-lg:pl-0">
-                <div className="w-full flex justify-end md-lg:justify-start gap-3 items-center">
-                  <div className="w-[48px] h-[48px] rounded-full flex bg-[#f5f5f5] justify-center items-center ">
-                    <span>
-                      <FaPhoneAlt />
-                    </span>
-                  </div>
-                  <div className="flex justify-end flex-col gap-1">
-                    <span className="text-sm">Online 24/7</span>
-                  </div>
-                </div>
-              </div>
+              <div className="w-4/12 block md-lg:hidden pl-2 md-lg:w-full md-lg:pl-0"></div>
             </div>
           </div>
         </div>

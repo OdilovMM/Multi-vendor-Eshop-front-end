@@ -6,7 +6,7 @@ export const getAllCategories = createAsyncThunk(
   "home/getAllCategories",
   async (_, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.get(`/home/get-categories`, {
+      const { data } = await api.get(`/category/get-all-categories`, {
         withCredentials: true,
       });
       return fulfillWithValue(data);
@@ -15,12 +15,11 @@ export const getAllCategories = createAsyncThunk(
     }
   }
 );
-
-export const getProductsByType = createAsyncThunk(
-  "home/getProductsByTypes",
+export const getHomeProductsLandingPage = createAsyncThunk(
+  "home/getHomeProductsLandingPage",
   async (_, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.get("/home/get-products", {
+      const { data } = await api.get("/products/get-home-products", {
         withCredentials: true,
       });
       return fulfillWithValue(data);
@@ -32,9 +31,8 @@ export const getProductsByType = createAsyncThunk(
 export const getProductDetail = createAsyncThunk(
   "home/getProductDetail",
   async (slug, { rejectWithValue, fulfillWithValue }) => {
-    console.log(slug);
     try {
-      const { data } = await api.get(`/home/get-product/${slug}`, {
+      const { data } = await api.get(`/products/get-product-detail/${slug}`, {
         withCredentials: true,
       });
       return fulfillWithValue(data);
@@ -43,12 +41,11 @@ export const getProductDetail = createAsyncThunk(
     }
   }
 );
-
 export const getProductsPriceRange = createAsyncThunk(
   "home/getProductsByPriceRange",
   async (_, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.get("/home/get-products-price-range", {
+      const { data } = await api.get("/products/get-products-by-price-range", {
         withCredentials: true,
       });
       return fulfillWithValue(data);
@@ -57,13 +54,12 @@ export const getProductsPriceRange = createAsyncThunk(
     }
   }
 );
-
 export const queryProduct = createAsyncThunk(
   "home/queryProduct",
   async (query, { rejectWithValue, fulfillWithValue }) => {
     try {
       const { data } = await api.get(
-        `/home/product-query?category=${query.searchCategory}&&rating=${
+        `/products/product-query?category=${query.searchCategory}&&rating=${
           query.rating
         }&&lowPrice=${query.low}&&highPrice=${query.high}&&sort=${
           query.sortPrice
@@ -84,10 +80,9 @@ export const queryProduct = createAsyncThunk(
 export const customerReviewSend = createAsyncThunk(
   "review/customerReviewSend",
   async (info, { rejectWithValue, fulfillWithValue }) => {
-    console.log(info);
     try {
       const { data } = await api.post(
-        "/home/add-customer-product-review",
+        "/products/add-customer-product-review",
         info,
         {
           withCredentials: true,
@@ -104,7 +99,7 @@ export const getAllReviews = createAsyncThunk(
   async ({ productId, pageNumber }, { rejectWithValue, fulfillWithValue }) => {
     try {
       const { data } = await api.get(
-        `/home/get-all-reviews/${productId}?pageNumber=${pageNumber}`,
+        `/products/get-all-reviews/${productId}?pageNumber=${pageNumber}`,
 
         {
           withCredentials: true,
@@ -116,20 +111,30 @@ export const getAllReviews = createAsyncThunk(
     }
   }
 );
+
 export const getAllBanners = createAsyncThunk(
   "banners/getAllBanners",
   async (_, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.get(
-        "/products/get-all-banners",
-
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await api.get("/banner/get-all-banners", {
+        withCredentials: true,
+      });
       return fulfillWithValue(data);
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const getProductsByTypeProps = createAsyncThunk(
+  "home/getProductByTypeProps",
+  async ({ type }, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.get(`/products/${type}`, {
+        withCredentials: true,
+      });
+
+      return fulfillWithValue(data);
+    } catch (error) {
       return rejectWithValue(error.response.data);
     }
   }
@@ -139,13 +144,14 @@ export const homeReducer = createSlice({
   name: "home",
   initialState: {
     isLoading: false,
+    topRated: [],
+    newArrivals: [],
+    featuredProducts: [],
     categories: [],
     products: [],
     totalProducts: 0,
     parPage: 5,
     latestProduct: [],
-    topRatedProduct: [],
-    discountProduct: [],
     priceRange: {
       low: 0,
       high: 100,
@@ -163,6 +169,16 @@ export const homeReducer = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getProductsByTypeProps.pending, (state, { payload }) => {
+        state.isLoading = true;
+      })
+      .addCase(getProductsByTypeProps.fulfilled, (state, { payload }) => {
+        state.featuredProducts = payload.data.products;
+        state.isLoading = false;
+      })
+      .addCase(getProductsByTypeProps.rejected, (state, { payload }) => {
+        state.isLoading = false;
+      })
       .addCase(getAllCategories.pending, (state, { payload }) => {
         state.isLoading = true;
       })
@@ -173,37 +189,36 @@ export const homeReducer = createSlice({
       .addCase(getAllCategories.rejected, (state, { payload }) => {
         state.isLoading = false;
       })
-      .addCase(getProductsByType.pending, (state, { payload }) => {
+      .addCase(getHomeProductsLandingPage.pending, (state, { payload }) => {
         state.isLoading = true;
       })
-      .addCase(getProductsByType.fulfilled, (state, { payload }) => {
-        state.products = payload.products;
-        state.latestProduct = payload.latestProduct;
-        state.topRatedProduct = payload.topRatedProduct;
-        state.discountProduct = payload.discountProduct;
+      .addCase(getHomeProductsLandingPage.fulfilled, (state, { payload }) => {
+        state.products = payload.data.products;
+        state.topRated = payload.data.topRatedProducts;
+        state.newArrivals = payload.data.newArrivals;
         state.isLoading = false;
       })
-      .addCase(getProductsByType.rejected, (state, { payload }) => {
+      .addCase(getHomeProductsLandingPage.rejected, (state, { payload }) => {
         state.isLoading = false;
       })
       .addCase(getProductsPriceRange.pending, (state, { payload }) => {
         state.isLoading = true;
       })
       .addCase(getProductsPriceRange.fulfilled, (state, { payload }) => {
-        state.latestProduct = payload.latestProduct;
-        state.priceRange = payload.priceRange;
+        state.latestProduct = payload.data.latestProduct;
+        state.priceRange = payload.data.priceRange;
         state.isLoading = false;
       })
       //
       .addCase(getProductsPriceRange.rejected, (state, { payload }) => {
         state.isLoading = false;
       })
-     
+
       .addCase(queryProduct.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.products = payload.products;
-        state.totalProducts = payload.totalProducts;
-        state.parPage = payload.parPage;
+        state.products = payload.data.products;
+        state.totalProducts = payload.data.totalProducts;
+        state.parPage = payload.data.parPage;
       })
       // detailed product
       .addCase(getProductDetail.pending, (state, { payload }) => {
@@ -212,9 +227,9 @@ export const homeReducer = createSlice({
       .addCase(getProductDetail.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         // state.categories = payload.categories;
-        state.product = payload.product;
-        state.categoryRelatedProducts = payload.categoryRelatedProducts;
-        state.sellerRelatedProducts = payload.sellerRelatedProducts;
+        state.product = payload.data.product;
+        state.categoryRelatedProducts = payload.data.categoryRelatedProducts;
+        state.sellerRelatedProducts = payload.data.sellerRelatedProducts;
       })
       .addCase(getProductDetail.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -224,13 +239,11 @@ export const homeReducer = createSlice({
       })
       .addCase(customerReviewSend.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        toast.success(payload.message);
-        console.log(payload);
+        // toast.success(payload.message);
       })
       .addCase(customerReviewSend.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload.error);
-        console.log(payload);
       })
 
       .addCase(getAllReviews.pending, (state, { payload }) => {
@@ -238,9 +251,9 @@ export const homeReducer = createSlice({
       })
       .addCase(getAllReviews.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.reviews = payload.reviews;
-        state.totalReviews = payload.totalReview;
-        state.ratingReview = payload.ratingReview;
+        state.reviews = payload.data.reviews;
+        state.totalReviews = payload.data.totalReview;
+        state.ratingReview = payload.data.ratingReview;
       })
       .addCase(getAllReviews.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -251,7 +264,7 @@ export const homeReducer = createSlice({
       })
       .addCase(getAllBanners.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.banners = payload.getBanners;
+        state.banners = payload.data.banners;
       });
   },
 });

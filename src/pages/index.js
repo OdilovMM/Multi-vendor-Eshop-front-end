@@ -19,6 +19,8 @@ import MyOrderPage from "./profile/MyOrderPage.jsx";
 import WishlistPage from "./profile/WishlistPage.jsx";
 import ChangePasswordPage from "./profile/ChangePasswordPage.jsx";
 import ConfirmOrder from "./profile/ConfirmOrder.jsx";
+import FeaturedProd from "./profile/FeaturedProd.jsx";
+import ProfileInfo from "./profile/ProfileInfo.jsx";
 
 export {
   Home,
@@ -42,4 +44,6 @@ export {
   WishlistPage,
   ChangePasswordPage,
   ConfirmOrder,
+  FeaturedProd,
+  ProfileInfo
 };

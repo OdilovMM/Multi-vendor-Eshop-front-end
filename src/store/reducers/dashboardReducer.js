@@ -41,10 +41,10 @@ export const dashboardReducer = createSlice({
       })
       .addCase(getDashboardIndexData.fulfilled, (state, { payload }) => {
         state.loader = false;
-        state.recentOrders = payload.recentOrders;
-        state.pendingOrder = payload.pendingOrder;
-        state.cancelledOrder = payload.cancelledOrder;
-        state.totalOrder = payload.totalOrder;
+        state.recentOrders = payload.data.recentOrders;
+        state.pendingOrder = payload.data.pendingOrder;
+        state.cancelledOrder = payload.data.cancelledOrder;
+        state.totalOrder = payload.data.totalOrder;
       });
   },
 });

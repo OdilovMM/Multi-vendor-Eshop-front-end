@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUserCustomer } from "../store/reducers/authReducer";
+import { registerUser } from "../store/reducers/authReducer";
 import { ScaleLoader } from "react-spinners";
 
 const RegisterPage = () => {
@@ -10,9 +10,11 @@ const RegisterPage = () => {
   const navigate = useNavigate();
   const { loader, userInfo } = useSelector((state) => state.customerAuth);
 
+  const [agree, setAgree] = useState(false);
   const [visible, setVisible] = useState(false);
   const [state, setState] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -26,7 +28,7 @@ const RegisterPage = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    dispatch(registerUserCustomer(state));
+    dispatch(registerUser(state));
   };
 
   useEffect(() => {
@@ -39,7 +41,7 @@ const RegisterPage = () => {
 
   return (
     <div className="min-w-screen h-full  py-9 my-5  flex items-center justify-center">
-      <div className="w-[350px] shadow-xl text-[#fffFFF] bg-[#ebf1f0] p-7 rounded-md">
+      <div className="w-[350px]  text-[#fffFFF] bg-[#ebf1f0] p-7 rounded-md shadow-2xl border border-blue-700">
         <h2 className="text-xl text-black mb-3 font-bold">Register</h2>
 
         <form className="space-y-6" onSubmit={handleRegister}>
@@ -48,14 +50,33 @@ const RegisterPage = () => {
               htmlFor="name"
               className="block text-sm font-medium text-gray-700"
             >
-              Name
+              First Name
             </label>
             <div className="mt-1">
               <input
                 onChange={handleInput}
                 value={state.name}
                 type="text"
-                name="name"
+                name="firstName"
+                autoComplete="name"
+                required
+                className="appearance-none block w-full px-3 text-black  py-2 border border-gray-400 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Last Name
+            </label>
+            <div className="mt-1">
+              <input
+                onChange={handleInput}
+                value={state.name}
+                type="text"
+                name="lastName"
                 autoComplete="name"
                 required
                 className="appearance-none block w-full px-3 text-black  py-2 border border-gray-400 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -123,6 +144,7 @@ const RegisterPage = () => {
               type="checkbox"
               name="checkbox"
               id="checkbox"
+              onChange={() => setAgree(!agree)}
               className="w-4 h-4 text-blue-600 overflow-hidden "
             />
             <label htmlFor="checkbox" className="text-black">
@@ -132,9 +154,13 @@ const RegisterPage = () => {
 
           <div>
             <button
-              disabled={loader ? true : false}
+              disabled={agree ? false : true}
               type="submit"
-              className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700"
+              className={` ${
+                agree
+                  ? "bg-blue-700 hover:bg-blue-600 transition-all duration-300 rounded-lg"
+                  : "cursor-not-allowed"
+              }  group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium bg-blue-700  rounded-lg `}
             >
               {loader ? (
                 <ScaleLoader color="#fff" height={22} width={5} radius={2} />
@@ -145,7 +171,7 @@ const RegisterPage = () => {
           </div>
           <div className="flex gap-4 text-black">
             <h4>Already have an account?</h4>
-            <Link to="/login" className="text-blue-600 pl-2">
+            <Link to="/login" className="text-blue-600 pl-2 ">
               Login here
             </Link>
           </div>

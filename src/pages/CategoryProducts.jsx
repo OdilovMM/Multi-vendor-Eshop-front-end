@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BreadCrumbs, Cart, Pagination } from "../components";
 import { Range } from "react-range";
 import { AiFillStar } from "react-icons/ai";
 import { CiStar } from "react-icons/ci";
 import { Products } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { GridLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 import {
   getProductsPriceRange,
   queryProduct,
@@ -16,7 +16,6 @@ const CategoryProducts = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const searchCategory = searchParams.get("category");
-  console.log("category:", searchCategory);
 
   const {
     latestProduct,
@@ -74,7 +73,7 @@ const CategoryProducts = () => {
 
   return (
     <>
-      <div className="bg-[url('http://localhost:3000/images/banner/shop.png')]  h-[220px] mt-6 bg-cover bg-no-repeat bg-left">
+      <div className=" h-[220px] mt-6 bg-cover bg-no-repeat bg-left">
         <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-black">
           <h2 className="text-3xl font-bold">Category Page</h2>
           <div className="flex justify-center items-center gap-2 text-2xl w-full">
@@ -298,14 +297,13 @@ const CategoryProducts = () => {
                 </div>
 
                 {/* Products */}
-                {/* <div className="grid pb-8 gap-4 grid-cols-4 md:grid-cols-3 md:gap-3 md-lg:grid-cols-2  sm:grid-cols-1"> */}
                 {isLoading ? (
                   <div className="flex flex-wrap justify-center items-center mt-[250px]">
-                    <GridLoader margin={3} size={39} />
+                    <MoonLoader margin={3} size={39} />
                   </div>
                 ) : (
                   <div className="flex flex-row gap-[8px] flex-wrap">
-                    {products.map((product, index) => (
+                    {products?.map((product, index) => (
                       <Cart product={product} key={index} />
                     ))}
                   </div>

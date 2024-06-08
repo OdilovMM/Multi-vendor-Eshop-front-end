@@ -8,6 +8,7 @@ const Banner = () => {
   const dispatch = useDispatch();
   const { banners } = useSelector((state) => state.home);
 
+
   useEffect(() => {
     dispatch(getAllBanners());
   }, [dispatch]);
@@ -46,10 +47,10 @@ const Banner = () => {
                 responsive={responsive}
                 draggable={false}
               >
-                {banners.length > 0 &&
-                  banners.map((banner, i) => (
+                {banners?.length > 0 &&
+                  banners?.map((banner, i) => (
                     <Link key={i} to={`/product/details/${banner.link}`}>
-                      <img src={banner.banner} alt="" />
+                      <img src={banner?.banner} alt="" />
                     </Link>
                   ))}
               </Carousel>

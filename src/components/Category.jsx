@@ -57,17 +57,17 @@ const Category = () => {
         {categories.map((category, i) => (
           <Link
             to={`/products?category=${category.name}`}
-            className="h-[120px] w-[120px] border block hover:bg-slate-500"
+            className="h-[120px] w-[120px]  block hover:bg-slate-500"
             key={i}
           >
-            <div className="w-full h-full relative p-3 bg-white ">
+            <div className="w-full h-full relative bg-white ">
               <img
                 src={category.image}
                 alt=""
-                className="rounded-full object-cover bg-slate-200  w-full h-full hover:scale-105 transition-all duration-300"
+                className="rounded-full object-contain bg-slate-200  w-full h-full hover:scale-105 transition-all duration-300"
               />
-              <div className="absolute bottom-1 shadow-md w-full mx-auto font-bold left-0 top-[80px] flex justify-center items-center">
-                <span className="py-[2px] text-[9px] text-center rounded-md px-2 bg-green-400 text-black">
+              <div className="absolute bottom-0 shadow-md w-full mx-auto font-bold bg-gray-400 opacity-90 hover:opacity-10 transition-all duration-300 left-0 rounded-full top-[1px] flex justify-center items-center">
+                <span className=" text-[14px] text-center  text-white ">
                   {category.name}
                 </span>
               </div>

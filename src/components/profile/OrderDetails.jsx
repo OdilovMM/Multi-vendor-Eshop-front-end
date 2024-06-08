@@ -16,7 +16,7 @@ const OrderDetails = () => {
     <>
       <div className="bg-white p-5 min-h-[50vh] rounded-lg shadow-lg">
         <h2 className="text-slate-600 font-semibold">
-          #{myOrder._id} , <span className="pl-1">{myOrder.date}</span>{" "}
+          #{myOrder?._id} , <span className="pl-1">{myOrder.date}</span>{" "}
         </h2>
         <div className="grid grid-cols-2 gap-3">
           <div className="flex flex-col gap-1">
@@ -89,7 +89,7 @@ const OrderDetails = () => {
                       alt=""
                     />
                     <div className="flex text-sm flex-col justify-start items-start">
-                      <Link> {p.name} </Link>
+                      <Link to={`/product/details/${p.slug}`}> {p.name} </Link>
                       <p>
                         {" "}
                         <span>Brand : {p.brand}</span>{" "}

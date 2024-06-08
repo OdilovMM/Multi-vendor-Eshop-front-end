@@ -18,26 +18,39 @@ import {
   MyOrderPage,
   WishlistPage,
   ConfirmOrder,
+  FeaturedProd,
+  ProfileInfo,
 } from "./pages";
 import { MainLayout } from "./layout";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { OrderDetails } from "./components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllMyWishlists } from "./store/reducers/cartReducer";
+import { getMyCart, getMyWishlist } from "./store/reducers/cartReducer";
+import { getUserDetail } from "./store/reducers/authReducer";
 
 const App = () => {
   const dispatch = useDispatch();
+  
 
-  const { userInfo } = useSelector((state) => state.customerAuth);
+  const { userId } = useSelector((state) => state.customerAuth);
+  const { success } = useSelector((state) => state.cart);
 
   useEffect(() => {
-    if (userInfo) {
-      dispatch(getAllMyWishlists(userInfo.id));
+    if (userId) {
+      dispatch(getUserDetail());
+      dispatch(getMyWishlist());
+      dispatch(getMyCart());
     } else {
       return;
     }
-  }, [userInfo, dispatch]);
+  }, [userId, dispatch]);
+
+  useEffect(() => {
+    if (success) {
+      dispatch(getMyWishlist());
+    }
+  }, [dispatch, success]);
 
   return (
     <BrowserRouter>
@@ -47,6 +60,7 @@ const App = () => {
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="shop" element={<Shop />} />
+          <Route path="featured/products/:type" element={<FeaturedProd />} />
           <Route path="blog" element={<Blog />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
@@ -69,6 +83,7 @@ const App = () => {
             <Route index element={<HomeProfile />} />
             <Route path="my-orders" element={<MyOrderPage />} />
             <Route path="my-wishlist" element={<WishlistPage />} />
+            <Route path="my-profile" element={<ProfileInfo />} />
             <Route path="order/details/:orderId" element={<OrderDetails />} />
           </Route>
         </Route>
