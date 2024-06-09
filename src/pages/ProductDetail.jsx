@@ -64,9 +64,9 @@ const ProductDetail = () => {
     if (userInfo) {
       dispatch(
         addRemoveCart({
-          userId: userInfo.id,
+          userId: userInfo?.id,
           quantity: qty,
-          productId: product._id,
+          productId: product?._id,
         })
       );
     } else {
@@ -78,15 +78,15 @@ const ProductDetail = () => {
     let price = 0;
     if (product.discount !== 0) {
       price =
-        product.price - Math.floor((product.price * product.discount) / 100);
+        product?.price - Math.floor((product?.price * product?.discount) / 100);
     } else {
-      price = product.price;
+      price = product?.price;
     }
 
     const obj = [
       {
-        sellerId: product.sellerId,
-        shopName: product.shopName,
+        sellerId: product?.sellerId,
+        shopName: product?.shopName,
         price: qty * (price - Math.floor((price * 5) / 100)),
         products: [
           {
@@ -108,7 +108,7 @@ const ProductDetail = () => {
 
   return (
     <div className="overflow-y-hidden">
-      <div className="bg-[url('http://localhost:3001/images/banner/shop.png')] bg-slate-200 md:min-w-[320px] h-[120px] mt-6 bg-cover bg-no-repeat bg-left">
+      <div className=" bg-slate-200 md:min-w-[320px] h-[120px] mt-6 bg-cover bg-no-repeat bg-left">
         <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-black">
           <div className="flex justify-center md:items-start md:justify-start items-center gap-2 md:text-[12px] text-2xl w-full">
             <BreadCrumbs
@@ -186,7 +186,7 @@ const ProductDetail = () => {
               </p>
             </div>
             <span className="h-[30px] text-2xl text-red-600 font-bold flex gap-3">
-              {alarm ? <p>We have only {product.stock} items</p> : ""}
+              {alarm ? <p>We have only {product?.stock} items</p> : ""}
             </span>
 
             {/* actions */}

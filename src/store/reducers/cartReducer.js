@@ -2,23 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/api";
 import toast from "react-hot-toast";
 
-export const deleteProductFromCart = createAsyncThunk(
-  "del/removeFromCart",
-  async (id, { rejectWithValue, fulfillWithValue }) => {
-    try {
-      const { data } = await api.delete(
-        `/cart/remove-product-from-cart/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
-
-      return fulfillWithValue(data);
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
 
 export const incrementProductQuantity = createAsyncThunk(
   "incr/incrementProductQuantity",
@@ -143,9 +126,7 @@ export const cartReducer = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(deleteProductFromCart.fulfilled, (state, { payload }) => {
-        state.successMessage = payload.message;
-      })
+      
       .addCase(incrementProductQuantity.fulfilled, (state, { payload }) => {
         state.success = true;
       })

@@ -114,9 +114,9 @@ const CategoryProducts = () => {
 
                 <Range
                   step={1}
-                  min={priceRange.low}
-                  max={priceRange.high}
-                  values={value.values}
+                  min={priceRange?.low}
+                  max={priceRange?.high}
+                  values={value?.values}
                   onChange={(values) => setValue({ values })}
                   renderTrack={({ props, children }) => (
                     <div

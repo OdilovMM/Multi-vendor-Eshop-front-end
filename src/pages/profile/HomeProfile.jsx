@@ -105,23 +105,23 @@ const HomeProfile = () => {
                       className="bg-white border-b hover:bg-slate-200 cursor-pointer"
                     >
                       <td className="px-4 py- font-medium whitespace-normal">
-                        ({ind + 1}) #{recent._id}
+                        ({ind + 1}) #{recent?._id}
                       </td>
                       <td className="px-4 py-3 font-medium whitespace-normal">
-                        ${recent.price}
+                        ${recent?.price}
                       </td>
                       <td className="px-5 py-3 font-medium whitespace-normal">
-                        {recent.paymentStatus}
+                        {recent?.paymentStatus}
                       </td>
                       <td className="px-4 py-3 font-medium whitespace-normal">
-                        {recent.date}
+                        {recent?.date}
                       </td>
                       <td className="px-5 py-3 font-medium whitespace-normal">
-                        {recent.deliveryStatus}
+                        {recent?.deliveryStatus}
                       </td>
                       <td className="px-4 py-3 font-medium whitespace-normal flex flex-row gap-2">
                         <Link
-                          to={`/dashboard/order/details/${recent._id}`}
+                          to={`/dashboard/order/details/${recent?._id}`}
                           className="px-2 py-[2px]  rounded-md flex items-center justify-center"
                         >
                           <MdOutlineRemoveRedEye
@@ -131,7 +131,7 @@ const HomeProfile = () => {
                           />
                         </Link>
 
-                        {recent.paymentStatus !== "paid" ? (
+                        {recent?.paymentStatus !== "paid" ? (
                           <button
                             onClick={() => redirectToPay(recent)}
                             className="px-3 py-[2px]  rounded-md  flex items-center justify-center"

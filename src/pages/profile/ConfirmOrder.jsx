@@ -7,12 +7,15 @@ import axios from "axios";
 import ok from "../../assets/success.svg";
 import { Link } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
+import { API_BASE_URL } from "../../utils/backendUrl";
 
 const load = async () => {
   return await loadStripe(
     "pk_test_51PFLMyHlAJ34DQFenZIccsL7H9U5T9sPRmOjBL5dqyXy3BW1ghMDGYibLD19sL0i4H4wskhmLJb0DnEiksn9EOrd00WyDJ4x1x"
   );
 };
+
+
 
 const ConfirmOrder = () => {
   const [loader, setLoader] = useState(true);
@@ -61,7 +64,7 @@ const ConfirmOrder = () => {
     if (orderId) {
       try {
         await axios.get(
-          `http://localhost:8000/api/v1/order/confirm/${orderId}`
+          `${API_BASE_URL}/order/confirm/${orderId}`
         );
         localStorage.removeItem("orderId");
         setLoader(false);

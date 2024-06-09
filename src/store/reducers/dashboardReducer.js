@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/api";
-import toast from "react-hot-toast";
 
 export const getDashboardIndexData = createAsyncThunk(
   "dashboard/getDashboardIndexData",

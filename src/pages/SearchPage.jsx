@@ -125,9 +125,9 @@ const SearchPage = () => {
 
                 <Range
                   step={1}
-                  min={priceRange.low}
-                  max={priceRange.high}
-                  values={value.values}
+                  min={priceRange?.low}
+                  max={priceRange?.high}
+                  values={value?.values}
                   onChange={(values) => setValue({ values })}
                   renderTrack={({ props, children }) => (
                     <div
@@ -147,10 +147,10 @@ const SearchPage = () => {
                 <div>
                   <span className="text-slate-800 font-bold text-lg flex justify-between">
                     <span className="block">
-                      ${Math.floor(value.values[0])}
+                      ${Math.floor(value?.values[0])}
                     </span>
                     <span className="block">
-                      ${Math.floor(value.values[1])}
+                      ${Math.floor(value?.values[1])}
                     </span>
                   </span>
                 </div>

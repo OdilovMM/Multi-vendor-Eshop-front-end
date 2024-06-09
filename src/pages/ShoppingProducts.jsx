@@ -25,10 +25,7 @@ const ShoppingProducts = ({ styles }) => {
                 : "md-lg:w-full relative group h-[210px] md:h-[270px] overflow-hidden"
             }
           >
-            <img
-              src={`http://localhost:3000/images/products/${index + 1}.webp`}
-              alt=""
-            />
+            <img src="" alt="" />
           </div>
         </div>
       ))}

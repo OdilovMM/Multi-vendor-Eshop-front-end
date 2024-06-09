@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import {
-  deleteProductFromCart,
-  messageClear,
+
   incrementProductQuantity,
   decrementProductQuantity,
   getMyCart,
@@ -110,7 +109,7 @@ const AddedProductCart = () => {
                   <div className="flex flex-col gap-4 justify-between">
                     <div className="bg-[#fff]  rounded-lg  border-2 border-blue-400 p-4">
                       <h2 className="text-md text-gray-500 font-semibold">
-                        In stock {cardProducts.length} products
+                        In stock {cardProducts?.length} products
                       </h2>
                     </div>
 
@@ -121,7 +120,7 @@ const AddedProductCart = () => {
                       >
                         <div className="flex justify-start items-center">
                           <h2 className="text-md text-slate-600 font-bold">
-                            Shop Name: {pr.shopName}
+                            Shop Name: {pr?.shopName}
                           </h2>
                         </div>
 
@@ -135,16 +134,16 @@ const AddedProductCart = () => {
                                 <Link className="rounded-md overflow-hidden">
                                   <img
                                     className="w-[130px] h-full object-contain"
-                                    src={product.productInfo.images[0]}
+                                    src={product?.productInfo?.images[0]}
                                     alt=""
                                   />
                                 </Link>
                                 <div className="pr-4 text-slate-600">
                                   <h2 className="text-md font-semibold">
-                                    Name: {product.productInfo.name}
+                                    Name: {product?.productInfo?.name}
                                   </h2>
                                   <span className="text-sm">
-                                    Brand: {product.productInfo.brand}
+                                    Brand: {product?.productInfo?.brand}
                                   </span>
                                 </div>
                               </div>
@@ -305,7 +304,7 @@ const AddedProductCart = () => {
                                     <button
                                       onClick={handleDecrement(
                                         product?.quantity,
-                                        product.products[0]._id
+                                        product?.products[0]._id
                                       )}
                                       className="px-6 py-1 w-full  h-full cursor-pointer"
                                     >

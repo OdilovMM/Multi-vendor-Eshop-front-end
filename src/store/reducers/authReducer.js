@@ -115,7 +115,7 @@ export const authReducer = createSlice({
       })
       .addCase(loginUserCustomer.rejected, (state, { payload }) => {
         state.loader = false;
-        toast.error(payload.error);
+        toast.error(payload.message);
       })
       // get user detail
       .addCase(getUserDetail.pending, (state, { payload }) => {

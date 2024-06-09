@@ -84,19 +84,19 @@ const MyOrderPage = () => {
                       className="bg-white border-b hover:bg-slate-200 cursor-pointer"
                     >
                       <td className="px-2 py-4 font-medium whitespace-normal">
-                        ({index + 1}) #{myOrd._id}
+                        ({index + 1}) #{myOrd?._id}
                       </td>
                       <td className="px-3 py-4 font-medium whitespace-normal">
-                        ${myOrd.price}
+                        ${myOrd?.price}
                       </td>
                       <td className="px-4 py-4 font-medium whitespace-normal">
-                        {myOrd.paymentStatus}
+                        {myOrd?.paymentStatus}
                       </td>
                       <td className="px-1 py-4 font-medium whitespace-normal">
-                        {myOrd.date}
+                        {myOrd?.date}
                       </td>
                       <td className="px-3 py-4 font-medium whitespace-normal">
-                        {myOrd.deliveryStatus}
+                        {myOrd?.deliveryStatus}
                       </td>
                       <td className="px-4 py-4 font-medium whitespace-normal flex flex-row gap-2">
                         <Link
