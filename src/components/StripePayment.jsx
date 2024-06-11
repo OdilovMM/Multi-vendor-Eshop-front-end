@@ -25,7 +25,7 @@ const StripePayment = ({ orderId, price }) => {
   const handlePayment = async () => {
     try {
       const { data } = await axios.post(
-        `${API_BASE_URL}/api/v1/order/create-payment`,
+        `${API_BASE_URL}/order/create-payment`,
         { price },
         { withCredentials: true }
       );

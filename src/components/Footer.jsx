@@ -4,6 +4,8 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 
 const Footer = () => {
+
+  const currentYear = new Date().getFullYear()
   return (
     <footer className="bg-gray-700">
       <div className="w-[85%] flex text-white flex-wrap mx-auto border-b py-16 md-lg:pb-10 sm:pb-6">
@@ -96,7 +98,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="w-[90%] flex flex-wrap justify-center items-center text-white mx-auto py-5 text-center">
-        <span>Copiright @ 2024 All Rights Reserved </span>
+        <span>{currentYear} My Shop Group </span>
       </div>
     </footer>
   );
