@@ -20,9 +20,8 @@ const ProfileNav = () => {
     dispatch(logout());
     dispatch(resetUser());
     dispatch(resetCount());
-    setTimeout(() => {
-      navigate("/");
-    }, 500);
+    navigate("/login");
+   
   };
   return (
     <div className="w-3/12 md:w-full h-[100%] shadow-lg">

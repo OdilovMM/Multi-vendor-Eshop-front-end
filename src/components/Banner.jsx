@@ -4,10 +4,10 @@ import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllBanners } from "../store/reducers/homeReducer";
+import { MoonLoader } from "react-spinners";
 const Banner = () => {
   const dispatch = useDispatch();
-  const { banners } = useSelector((state) => state.home);
-
+  const { banners, bannerLoading } = useSelector((state) => state.home);
 
   useEffect(() => {
     dispatch(getAllBanners());
@@ -31,7 +31,6 @@ const Banner = () => {
       items: 1,
     },
   };
-
 
   return (
     <div className="w-full md-lg:mt-6">

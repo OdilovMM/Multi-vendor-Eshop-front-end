@@ -302,7 +302,7 @@ const Shop = () => {
             </div>
 
             <div className="w-9/12 md-lg:w-8/12 md:w-full">
-              <div className="pl-8 md:pl-0">
+              <div className="pl-8 md:pl-0 ">
                 <div className="py-4 bg-white mb-10 px-3 p-4 shadow-md rounded-md flex justify-between items-start border">
                   <h2 className="text-lg font-medium text-slate-600">
                     {totalProducts === 0
@@ -312,7 +312,7 @@ const Shop = () => {
                         }`}
                   </h2>
 
-                  <div className="flex justify-center items-start gap-3 ">
+                  <div className="flex justify-center md:flex-col md:justify-end md:items-end items-start gap-3 ">
                     <button
                       onClick={resetFilter}
                       className="inline-flex items-center px-4 py-[6px] bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md"
@@ -342,11 +342,7 @@ const Shop = () => {
                   <div className="flex flex-row gap-[8px] flex-wrap">
                     {products?.map((product, index) => {
                       return (
-                        <Cart
-                          product={product}
-                          index={index}
-                          key={index}
-                        />
+                        <Cart product={product} index={index} key={index} />
                       );
                     })}
                   </div>

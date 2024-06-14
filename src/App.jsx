@@ -31,7 +31,6 @@ import { getUserDetail } from "./store/reducers/authReducer";
 
 const App = () => {
   const dispatch = useDispatch();
-  
 
   const { userId } = useSelector((state) => state.customerAuth);
   const { success } = useSelector((state) => state.cart);

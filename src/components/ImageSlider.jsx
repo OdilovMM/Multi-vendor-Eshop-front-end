@@ -22,25 +22,25 @@ const ImageSlider = ({ images }) => {
 
   return (
     <>
-      <div className="flex justify-between gap-2 h-[500px] flex-row w-full z-[99999]  ">
-        <div className="w-2/12 flex flex-col border-gray-400 rounded-md overflow-hidden overflow-y-scroll items-center justify-start gap-5 h-[500px] scrollbar-thin ">
+      <div className="flex  h-[500px] flex-row md:flex-col   w-full z-[99999]  ">
+        <div className=" flex flex-col md:flex-row border-gray-400 rounded-md overflow-hidden overflow-y-scroll md:overflow-x-scroll md:overflow-y-hidden items-center justify-start gap-5 md:h-[200px] h-[500px] scrollbar-thin ">
           {images?.map((image, index) => (
             <img
               src={images[index]}
               onClick={() => setImgInd(index)}
               key={index}
-              className="object-contain cursor-pointer rounded-lg border border-gray-500 w-full h-[83px] "
+              className="object-contain cursor-pointer rounded-lg   w-full h-[83px]"
             />
           ))}
         </div>
-        <div className="w-10/12 relative h-[500px] rounded-lg border border-gray-400 overflow-hidden">
+        <div className=" relative h-[500px] rounded-lg overflow-hidden">
           <span
             onClick={() => changeImage("left")}
             className="absolute pl-4 bottom-[250px] left-0 cursor-pointer"
           >
-            <BiLeftArrow color="black" size={26} />
+            <BiLeftArrow color="gray" size={13} />
           </span>
-          <div className="h-[500px]">
+          <div className="h-[500px] md:h-[350px]">
             <img
               src={images?.[imgInd]}
               alt=""
@@ -51,7 +51,7 @@ const ImageSlider = ({ images }) => {
             onClick={() => changeImage("right")}
             className=" absolute pr-4 right-0   bottom-[250px] cursor-pointer"
           >
-            <BiRightArrow color="black" size={26} />{" "}
+            <BiRightArrow color="gray" size={13} />{" "}
           </span>
         </div>
       </div>

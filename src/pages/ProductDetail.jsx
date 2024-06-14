@@ -129,7 +129,7 @@ const ProductDetail = () => {
             <ImageSlider images={product?.images} />
           </div>
           <div className="flex flex-col gap-5">
-            <div className="text-3xl capitalize text-slate-400 font-bold">
+            <div className="text-3xl md:text-[15px] capitalize text-slate-400 font-bold">
               <h2>{product?.name}</h2>
             </div>
 
@@ -179,13 +179,13 @@ const ProductDetail = () => {
 
             {/* description */}
 
-            <div className="text-black h-[180px] bg-[#ecf4f576] p-2 rounded-md shadow-md">
+            <div className="text-black md:text-[13px] h-[180px] bg-[#ecf4f576] p-2 rounded-md shadow-md">
               <p>
                 {product?.description?.substring(0, 250)}
                 {"..."}
               </p>
             </div>
-            <span className="h-[30px] text-2xl text-red-600 font-bold flex gap-3">
+            <span className="h-[30px] text-[16px] text-red-600 font-bold flex gap-3 my-2 ">
               {alarm ? <p>We have only {product?.stock} items</p> : ""}
             </span>
 
@@ -195,42 +195,45 @@ const ProductDetail = () => {
               {product?.stock ? (
                 <div className="flex flex-col items-start">
                   <div className="flex gap-3">
-                    <div className="flex h-[50px] flex-row justify-center items-center text-xl gap-1">
-                      <button
-                        onClick={decrement}
-                        className="px-4 py-3 inline-flex items-center bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md "
-                      >
-                        <BiSolidDownArrow color="blue" size={18} />
-                      </button>
-                      <span className="w-[55px]  inline-flex items-center justify-center py-[11px] bg-gray-200  text-gray-800 text-sm font-medium rounded-md">
-                        {" "}
-                        {qty}
-                      </span>
-                      <button
-                        title={alarm ? `Out of stock` : ``}
-                        onClick={increment}
-                        className={` ${
-                          alarm ? "cursor-not-allowed" : ""
-                        } px-4 py-3 inline-flex items-center bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md`}
-                      >
-                        <BiSolidUpArrow color="blue" size={18} />
-                      </button>
-
-                      {userInfo ? (
+                    <div className="flex h-[50px] flex-row md:flex-col md:items-start justify-center items-center text-xl gap-1">
+                      <div className="flex justify-center   items-center gap-2">
                         <button
-                          onClick={handleAddToCart}
-                          className="inline-flex items-center px-4 py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
+                          onClick={decrement}
+                          className="px-4 py-3 inline-flex items-center bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md "
                         >
-                          <IoBagAddSharp size={18} />
+                          <BiSolidDownArrow color="blue" size={18} />
                         </button>
-                      ) : (
-                        <Link
-                          to="/login"
-                          className=" w-[205px]  bg-slate-300 py-2 flex items-center justify-center gap-2"
+                        <span className="w-[55px]  inline-flex items-center justify-center py-[11px] bg-gray-200  text-gray-800 text-sm font-medium rounded-md">
+                          {" "}
+                          {qty}
+                        </span>
+                        <button
+                          title={alarm ? `Out of stock` : ``}
+                          onClick={increment}
+                          className={` ${
+                            alarm ? "cursor-not-allowed" : ""
+                          } px-4 py-3 inline-flex items-center bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md`}
                         >
-                          Login To Add Cart
-                        </Link>
-                      )}
+                          <BiSolidUpArrow color="blue" size={18} />
+                        </button>
+                      </div>
+                      <div className="justify-center items-center gap-2">
+                        {userInfo ? (
+                          <button
+                            onClick={handleAddToCart}
+                            className="inline-flex items-center px-4 py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
+                          >
+                            <IoBagAddSharp size={18} />
+                          </button>
+                        ) : (
+                          <Link
+                            to="/login"
+                            className=" w-[170px] rounded-md md:text-[14px]  bg-slate-300 py-2 flex items-center justify-center gap-2"
+                          >
+                            Login To Add Cart
+                          </Link>
+                        )}
+                      </div>
                     </div>
                     <div className="flex h-[50px] justify-center items-center text-xl gap-1"></div>
                   </div>
@@ -323,12 +326,14 @@ const ProductDetail = () => {
             </div>
           </div>
           {/* related products from shop */}
-          <div className="w-[21%] md-lg:w-full">
+          <div className="w-[21%] md-lg:w-full mt-4">
             {sellerRelatedProducts && (
-              <div className="pl-4 md-lg:pl-0">
+              <div className="pl-4 md-lg:pl-0 ">
                 <div className="px-3 py-2 text-slate-600 bg-slate-200 rounded-md">
-                  <h2 className="font-bold">
-                    Products from {product?.shopName}
+                  <h2 className="font-bold ">
+                    Products from{" "}
+                    <span className="text-red-600">{product?.shopName}</span>{" "}
+                    seller
                   </h2>
                 </div>
                 <div className="flex flex-col md:flex-wrap md:flex-row gap-5 mt-3 border p-3">
@@ -351,7 +356,7 @@ const ProductDetail = () => {
       {/* related products */}
 
       <div className="w-[85%] py-4 md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto pb-12">
-        <h2 className="text-2xl py-8 text-slate-600">
+        <h2 className="text-2xl py-8  font-semibold text-blue-700">
           Category Related Products
         </h2>
         {/* swiper */}

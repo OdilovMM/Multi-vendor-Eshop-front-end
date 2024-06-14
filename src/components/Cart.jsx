@@ -61,12 +61,12 @@ const Cart = ({ product, index }) => {
     <>
       <div
         key={index}
-        className="w-[232px] h-[410px] flex flex-col justify-between md:w-[260px] overflow-hidden border-[0.5px] border-grey-200 md-lg:w-[290px] group  rounded-[6px] shadow-md  relative cursor-pointer"
+        className="w-[232px]  h-[410px] flex flex-col justify-between md:w-[180px] md:h-[290px] overflow-hidden border-[0.5px] border-grey-200 md-lg:w-[290px] group  rounded-[6px] shadow-md  relative cursor-pointer"
       >
         <div className="relative h-[300px] overflow-hidden   ">
           <Link className=" h-full w-full   flex justify-center items-center transition-transform duration-500 transform lg:scale-105 :scale-105 xl:scale-105 group-hover:scale-110">
             <img
-              src={product?.images[0]}
+              src={product?.images?.[0]}
               alt={product?.name}
               className="h-full w-full object-contain shadow-lg "
             />

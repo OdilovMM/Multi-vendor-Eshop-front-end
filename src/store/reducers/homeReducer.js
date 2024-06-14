@@ -143,6 +143,7 @@ export const getProductsByTypeProps = createAsyncThunk(
 export const homeReducer = createSlice({
   name: "home",
   initialState: {
+    bannerLoading: false,
     isLoading: false,
     topRated: [],
     newArrivals: [],
@@ -261,9 +262,11 @@ export const homeReducer = createSlice({
       })
       .addCase(getAllBanners.pending, (state, { payload }) => {
         state.isLoading = true;
+        state.bannerLoading = true;
       })
       .addCase(getAllBanners.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        state.bannerLoading = false;
         state.banners = payload.data.banners;
       });
   },

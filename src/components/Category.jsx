@@ -24,11 +24,11 @@ const Category = () => {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 4,
+      items: 6,
     },
     mdtablet: {
       breakpoint: { max: 991, min: 464 },
-      items: 4,
+      items: 5,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
@@ -40,7 +40,7 @@ const Category = () => {
     },
     xsmobile: {
       breakpoint: { max: 440, min: 0 },
-      items: 3,
+      items: 5,
     },
   };
 
@@ -57,7 +57,7 @@ const Category = () => {
         {categories.map((category, i) => (
           <Link
             to={`/products?category=${category.name}`}
-            className="h-[120px] w-[120px]  block hover:bg-slate-500"
+            className="h-[120px] w-[120px] md:h-[45px] md:w-[45px] block hover:bg-slate-500"
             key={i}
           >
             <div className="w-full h-full relative bg-white ">
@@ -66,8 +66,8 @@ const Category = () => {
                 alt=""
                 className="rounded-full object-contain bg-slate-200  w-full h-full hover:scale-105 transition-all duration-300"
               />
-              <div className="absolute bottom-0 shadow-md w-full mx-auto font-bold bg-gray-400 opacity-90 hover:opacity-10 transition-all duration-300 left-0 rounded-full top-[1px] flex justify-center items-center">
-                <span className=" text-[14px] text-center  text-white ">
+              <div className="absolute bottom-0 shadow-md w-full mx-auto font-bold bg-gray-400 opacity-90  md:opacity-0 lg:opacity-0 hover:opacity-10 transition-all duration-300 left-0 rounded-full top-[1px] flex justify-center items-center">
+                <span className=" text-[14px] md:text-[9px] text-center  text-white  ">
                   {category.name}
                 </span>
               </div>

@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/api";
 import toast from "react-hot-toast";
 
-
 export const incrementProductQuantity = createAsyncThunk(
   "incr/incrementProductQuantity",
   async (productId, { rejectWithValue, fulfillWithValue }) => {
@@ -111,8 +110,6 @@ export const cartReducer = createSlice({
     shippingFee: 0,
     outOfStockProducts: [],
     buyProductItem: 0,
-
- 
   },
   reducers: {
     messageClear: (state, _) => {
@@ -121,12 +118,14 @@ export const cartReducer = createSlice({
     },
     resetCount: (state, _) => {
       state.wishlist_count = "";
+      state.wishlist = [];
       state.cardProductCount = "";
+      state.cardProducts = [];
     },
   },
   extraReducers: (builder) => {
     builder
-      
+
       .addCase(incrementProductQuantity.fulfilled, (state, { payload }) => {
         state.success = true;
       })
@@ -192,6 +191,7 @@ export const cartReducer = createSlice({
       // Get my cart products
       .addCase(getMyCart.pending, (state, { payload }) => {
         state.loading = true;
+        
       })
       .addCase(getMyCart.fulfilled, (state, { payload }) => {
         state.loading = false;
