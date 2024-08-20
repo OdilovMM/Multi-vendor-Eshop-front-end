@@ -8,7 +8,7 @@ const store = configureStore({
       serializableCheck: false,
     });
   },
-  devTools: true,
+  devTools: false,
 });
 
 export default store;
