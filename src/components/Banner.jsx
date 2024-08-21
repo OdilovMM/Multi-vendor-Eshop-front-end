@@ -4,10 +4,11 @@ import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllBanners } from "../store/reducers/homeReducer";
-import { MoonLoader } from "react-spinners";
 const Banner = () => {
   const dispatch = useDispatch();
-  const { banners, bannerLoading } = useSelector((state) => state.home);
+  const { banners } = useSelector((state) => state.home);
+
+
 
   useEffect(() => {
     dispatch(getAllBanners());
@@ -33,11 +34,11 @@ const Banner = () => {
   };
 
   return (
-    <div className="w-full md-lg:mt-6">
+    <div className="w-full md-lg:mt-6 h-[650px] 2xs:h-[220px] md:h-[250px]">
       <div className="w-[85%] lg:w-[90%] mx-auto ">
-        <div className="w-full flex flex-wrap md-lg:gap-8 ">
-          <div className="w-full ">
-            <div className="my-8 rounded-[13px] overflow-hidden">
+        <div className="w-full flex flex-wrap md-lg:gap-8">
+          <div className="w-full">
+            <div className="mt-8 rounded-lg overflow-hidden   h-[570px]">
               <Carousel
                 autoPlay={true}
                 infinite={true}
@@ -48,8 +49,8 @@ const Banner = () => {
               >
                 {banners?.length > 0 &&
                   banners?.map((banner, i) => (
-                    <Link key={i} to={`/product/details/${banner.link}`}>
-                      <img src={banner?.banner} alt="" />
+                    <Link key={i} to={`/product/details/${banner.link}`} >
+                      <img src={banner?.banner} alt={banner.link} className="h-[100%] object-cover w-full "  />
                     </Link>
                   ))}
               </Carousel>

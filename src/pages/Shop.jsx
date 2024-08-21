@@ -164,7 +164,7 @@ const Shop = () => {
                   )}
                   renderThumb={({ props, key }) => (
                     <div
-                      key="1"
+                      key={key}
                       className="w-[12px] cursor-default h-[12px] bg-[#059473] rounded-full"
                       {...props}
                     />

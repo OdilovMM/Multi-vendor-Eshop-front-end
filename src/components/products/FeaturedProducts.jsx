@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const FeaturedProducts = ({ products, title, type }) => {
   return (
     <>
-      <div className="w-[85%] md:w-[98%] flex flex-row  flex-wrap mx-auto">
+      <div className="w-[85%] md:w-[98%] min-h-[470px] flex flex-row  flex-wrap mx-auto">
         <Link className="w-full" to={`featured/products/${type}`}>
           <div className=" flex justify-start gap-3 items-center  flex-row text-4xl text-slate-600 font-bold relative pb-[40px]">
             <h2 className="text-blue-800 md:text-[16px]">{title}</h2>
