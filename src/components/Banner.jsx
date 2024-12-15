@@ -34,11 +34,11 @@ const Banner = () => {
   };
 
   return (
-    <div className="w-full md-lg:mt-6 h-[650px] 2xs:h-[220px] md:h-[250px]">
-      <div className="w-[85%] lg:w-[90%] mx-auto ">
+    <div className="w-full md-lg:mt-6 2xs:h-[220px] md:h-[250px] mb-[50px]">
+      <div className="w-[95%] lg:w-[90%] mx-auto ">
         <div className="w-full flex flex-wrap md-lg:gap-8">
           <div className="w-full">
-            <div className="mt-8 rounded-lg overflow-hidden   h-[570px]">
+            <div className="mt-4 rounded-lg overflow-hidden">
               <Carousel
                 autoPlay={true}
                 infinite={true}

@@ -25,4 +25,24 @@
   background-color: #555;
 }
 
+.dropdown-scroll {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #d1d5db #f9fafb; /* Thumb and Track colors */
+}
 
+.dropdown-scroll::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.dropdown-scroll::-webkit-scrollbar-track {
+  background: #f9fafb; /* Track background */
+}
+
+.dropdown-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db; /* Thumb background */
+  border-radius: 4px; /* Rounded corners for the scrollbar thumb */
+}
+
+.dropdown-scroll::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af; /* Darker thumb on hover */
+}

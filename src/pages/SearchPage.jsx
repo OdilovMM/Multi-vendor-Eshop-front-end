@@ -45,7 +45,6 @@ const SearchPage = () => {
 
   // for pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [search, setSearch] = useState("");
   const [pages, setPages] = useState(5);
   // **
 
@@ -100,8 +99,8 @@ const SearchPage = () => {
         </div>
       </div>
 
-      <div className="py-16">
-        <div className="w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto">
+      <div className="py-4">
+        <div className="w-full md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto">
           <div className={`md:block hidden ${!filter ? "mb-6" : "mb-0"}`}>
             <button
               onClick={() => setFilter(!filter)}

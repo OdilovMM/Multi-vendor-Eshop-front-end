@@ -24,7 +24,6 @@ import { ImageSlider } from "../components";
 import { addRemoveCart } from "../store/reducers/cartReducer";
 
 const ProductDetail = () => {
-  const [image, setImage] = useState("");
   const [state, setState] = useState("reviews");
   const [qty, setQty] = useState(1);
   const [alarm, setAlarm] = useState(false);
@@ -123,7 +122,7 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      <div className="w-[85%] py-4 md:w-[320px] sm:w-[90%] lg:w-[90%] mt-3 h-full mx-auto">
+      <div className="w-full py-4 md:w-[320px] sm:w-[90%] lg:w-[90%] mt-3 h-full mx-auto">
         <div className="grid grid-cols-2 md-lg:grid-cols-1 gap-8">
           <div className="">
             <ImageSlider images={product?.images} />
@@ -289,7 +288,7 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      <div className="w-[85%] py-4 md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto pb-12">
+      <div className="w-full py-4 md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto pb-12">
         <div className="flex flex-wrap">
           <div className="w-[79%] md-lg::w-full">
             <div className="pr-4 md-lg:pr-0">
@@ -355,9 +354,9 @@ const ProductDetail = () => {
 
       {/* related products */}
 
-      <div className="w-[85%] py-4 md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto pb-12">
+      <div className="w-full py-4 md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto pb-12">
         <h2 className="text-2xl py-8  font-semibold text-blue-700">
-          Category Related Products
+          Related Products
         </h2>
         {/* swiper */}
         <div>
@@ -371,7 +370,7 @@ const ProductDetail = () => {
                 slidesPerView: 2,
               },
             }}
-            spaceBetween={25}
+            spaceBetween={1}
             loop={true}
             pagination={{
               clickable: true,

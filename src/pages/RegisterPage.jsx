@@ -41,7 +41,7 @@ const RegisterPage = () => {
 
   return (
     <div className="min-w-screen h-full  py-9 my-5  flex items-center justify-center">
-      <div className="w-[350px]  text-[#fffFFF] bg-[#ebf1f0] p-7 rounded-md shadow-2xl border border-blue-700">
+      <div className="w-[350px]  text-[#fffFFF] bg-[#ebf1f0] p-7 rounded-md shadow-md border border-blue-700">
         <h2 className="text-xl text-black mb-3 font-bold">Register</h2>
 
         <form className="space-y-6" onSubmit={handleRegister}>

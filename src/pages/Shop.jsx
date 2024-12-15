@@ -95,8 +95,8 @@ const Shop = () => {
         </div>
       </div>
 
-      <div className="py-16 bg-white">
-        <div className="w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto">
+      <div className="py-4 bg-white">
+        <div className="w-full md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto">
           <div className={`md:block hidden ${!filter ? "mb-6" : "mb-0"}`}>
             <button
               onClick={() => setFilter(!filter)}
@@ -114,7 +114,7 @@ const Shop = () => {
               }`}
             >
               <h2 className="text-3xl font-bold mb-3 text-slate-700">
-                Categories
+                Select a category
               </h2>
 
               <div className="p-4 shadow-md rounded-md">
@@ -308,7 +308,7 @@ const Shop = () => {
                     {totalProducts === 0
                       ? "No products found"
                       : `${totalProducts} ${
-                          totalProducts === 1 ? "Product" : "Products"
+                          totalProducts === 1 ? "Product found" : "Products found"
                         }`}
                   </h2>
 
@@ -347,7 +347,7 @@ const Shop = () => {
                     })}
                   </div>
                 )}
-                <div className="flex justify-end">
+                <div className="flex justify-center mt-4">
                   {totalProducts > parPage && (
                     <Pagination
                       pageNumber={currentPage}

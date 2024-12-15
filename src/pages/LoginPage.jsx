@@ -39,7 +39,7 @@ const LoginPage = () => {
 
   return (
     <div className="min-w-screen  min-h-[70vh] py-9 my-5  flex items-center justify-center">
-      <div className="w-[350px] text-[#fffFFF] bg-[#ecf0ef] shadow-2xl border border-blue-700 p-7 rounded-md">
+      <div className="w-[350px] text-[#fffFFF] bg-[#ecf0ef] shadow-md  border border-blue-700 p-7 rounded-md">
         <h2 className="text-xl text-black mb-3 font-bold">Login</h2>
 
         <form className="space-y-6" onSubmit={handleSubmitData}>

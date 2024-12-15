@@ -18,8 +18,13 @@ const Home = () => {
 
   }, [dispatch]);
   return (
-    <div className="w-full ">
-      <Banner />
+    <div className="w-full">
+      <div className="max-w-full flex">
+        <div className="min-w-[25%] "></div>
+        <div className="min-w-[75%] ">
+          <Banner />
+        </div>
+      </div>
       <Category />
       <div className="py-[40px]">
         <FeaturedProducts

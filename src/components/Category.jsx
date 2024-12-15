@@ -16,11 +16,11 @@ const Category = () => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 6,
+      items: 8,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 10,
+      items: 14,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -45,19 +45,19 @@ const Category = () => {
   };
 
   return (
-    <div className="w-[85%] mx-auto relative">
+    <div className="w-full mx-auto relative">
       <Carousel
         autoPlay={true}
         infinite={true}
-        arrows={true}
+        arrows={false}
         responsive={responsive}
-        transitionDuration={800}
-        draggable={false}
+        transitionDuration={400}
+        draggable={true}
       >
         {categories.map((category, i) => (
           <Link
             to={`/products?category=${category.name}`}
-            className="h-[120px] w-[120px] md:h-[45px] md:w-[45px] block hover:bg-slate-500"
+            className="h-[80px] w-[80px] md:h-[45px] md:w-[45px] block hover:bg-slate-500"
             key={i}
           >
             <div className="w-full h-full relative bg-white ">

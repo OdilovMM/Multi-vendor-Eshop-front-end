@@ -1,29 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { IoIosMail, IoIosArrowDown } from "react-icons/io";
-import { MdAddIcCall, MdFacebook } from "react-icons/md";
+import React, { useEffect, useState } from 'react';
+import { IoIosMail } from 'react-icons/io';
+import { MdAddIcCall, MdFacebook } from 'react-icons/md';
 import {
   FaTelegram,
   FaUserCircle,
   FaLinkedin,
   FaGithub,
   FaLock,
-  FaList,
-} from "react-icons/fa";
-import { IoLanguageSharp } from "react-icons/io5";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { IoHeart } from "react-icons/io5";
-import { SiShopify } from "react-icons/si";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllCategories } from "../store/reducers/homeReducer";
-import { getMyCart } from "../store/reducers/cartReducer";
+} from 'react-icons/fa';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { IoHeart } from 'react-icons/io5';
+import { SiShopify } from 'react-icons/si';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCategories } from '../store/reducers/homeReducer';
+import { getMyCart } from '../store/reducers/cartReducer';
 
 const Header = () => {
   const [showBar, setShowBar] = useState(true);
   const [showCategory, setShowCategory] = useState(true);
   const { pathname } = useLocation();
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
   const [category, setCategory] = useState();
 
   const navigate = useNavigate();
@@ -49,55 +46,48 @@ const Header = () => {
 
   const redirectCart = () => {
     if (userInfo) {
-      navigate("/my-cart");
+      navigate('/my-cart');
     } else {
-      navigate("/login");
+      navigate('/login');
     }
   };
 
   return (
-    <header className="w-full bg-white">
+    <header className="w-full bg-white border-b-[1px] border-[#e3e4e6] pb-[26px]">
       {/* top */}
-      <div className="header-top bg-gray-700 md-lg:hidden">
+      <div className="header-top bg-[#233a95] md-lg:hidden">
         <div className="w-[85%] lg:w-[90%] mx-auto">
-          <div className="flex w-full justify-between items-center h-[50px]">
-            <ul className="flex justify-start items-center gap-6 font-semibold text-white">
-              <li className="flex relative justify-center items-center gap-2 text-sm ">
-                <span>
-                  <MdAddIcCall size={18} />
-                </span>
-                <span>+(998) 90 532 99 14</span>
-              </li>
-            </ul>
+          <div className="flex w-full justify-between items-center h-[35px]">
+            <h2 className="text-white">
+              <span>
+                Due to the <strong>harsh weather</strong>, orders may be
+                processed with a slight delay
+              </span>
+            </h2>
             <div>
               <div className="flex justify-center items-center gap-8">
-                <div className="flex justify-center items-center gap-4 text-black">
-                  <Link to="https://github.com/OdilovMM">
-                    <MdFacebook size={22} color="white" />
-                  </Link>
-                  <Link to="https://t.me/Makhmudovichk">
-                    <FaTelegram size={22} color="white" />
-                  </Link>
-                  <Link to="https://github.com/OdilovMM">
-                    <FaLinkedin size={22} color="white" />
-                  </Link>
-                  <Link to="https://github.com/OdilovMM">
-                    <FaGithub size={22} color="white" />
-                  </Link>
-                </div>
-                {/* language */}
-                <div className="flex group cursor-pointer text-white  text-sm justify-center items-center gap-1 relative after:h-[18px] after:w-[1px] after:bg-[#afafaf] after:-right-[16px] after:absolute before:absolute before:h-[18px] before:bg-[#afafaf] before:w-[1px] before:-left-[20px]">
-                  <IoLanguageSharp size={18} />
-                  <span>
-                    <IoIosArrowDown />
-                  </span>
-
-                  <ul className="absolute invisible transition-all top-12 rounded-sm duration-200 text-white p-2 w-[75px] flex flex-col gap-3 group-hover:visible group-hover:top-6 group-hover:bg-[#8eaebb] z-10">
-                    <li>Uzb</li>
-                    <li>Eng</li>
-                    <li>Kor</li>
-                  </ul>
-                </div>
+                <ul className="flex justify-center items-center gap-4 text-black">
+                  <li>
+                    <Link to="https://github.com/OdilovMM">
+                      <MdFacebook size={20} color="white" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="https://t.me/Makhmudovichk">
+                      <FaTelegram size={20} color="white" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="https://github.com/OdilovMM">
+                      <FaLinkedin size={20} color="white" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="https://github.com/OdilovMM">
+                      <FaGithub size={20} color="white" />
+                    </Link>
+                  </li>
+                </ul>
 
                 {userInfo ? (
                   <>
@@ -106,8 +96,8 @@ const Header = () => {
                       to="/dashboard"
                     >
                       <span>
-                        {" "}
-                        <FaUserCircle color="white" size={22} />{" "}
+                        {' '}
+                        <FaUserCircle color="white" size={22} />{' '}
                       </span>
                       <span className="text-white">{userInfo?.firstName}</span>
                     </Link>
@@ -119,8 +109,8 @@ const Header = () => {
                       to="/login"
                     >
                       <span>
-                        {" "}
-                        <FaLock color="white" />{" "}
+                        {' '}
+                        <FaLock color="white" />{' '}
                       </span>
                       <span className="text-white">Login</span>
                     </Link>
@@ -159,7 +149,7 @@ const Header = () => {
                     <Link
                       to="/"
                       className={`p-2 block ${
-                        pathname === "/" ? "text-[#059473]" : "text-black"
+                        pathname === '/' ? 'text-[#059473]' : 'text-black'
                       }`}
                     >
                       home
@@ -169,7 +159,7 @@ const Header = () => {
                     <Link
                       to="/shop"
                       className={`p-2 block ${
-                        pathname === "/shop" ? "text-[#059473]" : "text-black"
+                        pathname === '/shop' ? 'text-[#059473]' : 'text-black'
                       }`}
                     >
                       shop
@@ -181,7 +171,7 @@ const Header = () => {
                   <div className="flex justify-center gap-5">
                     <div
                       onClick={() =>
-                        navigate(userInfo ? "/dashboard/my-wishlist" : "/login")
+                        navigate(userInfo ? '/dashboard/my-wishlist' : '/login')
                       }
                       className="relative flex justify-center hover:bg-[#bdc9c5] hover:text-white  items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]"
                     >
@@ -224,62 +214,18 @@ const Header = () => {
         <div
           onClick={() => setShowBar(true)}
           className={`fixed duration-300 transition-all ${
-            showBar ? "invisible" : "visible"
+            showBar ? 'invisible' : 'visible'
           } hidden md-lg:block w-screen h-screen bg-[rgba(0,0,0,0.5)] top-0 left-0 z-20`}
         ></div>
         <div
           className={`w-[300px] z-[9999] transition-all duration-300 fixed ${
-            showBar ? "-left-[300px] top-0  z-[999]" : "left-0 top-0 z-[999]"
+            showBar ? '-left-[300px] top-0  z-[999]' : 'left-0 top-0 z-[999]'
           } overflow-y-auto bg-white h-screen py-6 px-8 z-[999]`}
         >
           <div className="flex justify-start flex-col gap-6">
             <Link to="/">
               <h1 className="text-lg font-bold cursor-pointer">My Shop</h1>
             </Link>
-            <div className="flex justify-start items-center gap-9">
-              <div className="flex group cursor-pointer text-slate-600 text-sm justify-center items-center gap-1 relative after:h-[18px] after:w-[1px] after:bg-[#afafaf] after:-right-[16px] after:absolute ">
-                <IoLanguageSharp size={18} />
-                <span>
-                  <IoIosArrowDown />
-                </span>
-
-                <ul className="absolute invisible transition-all top-12 rounded-sm duration-200 text-white p-2 w-[75px] flex flex-col gap-3 group-hover:visible group-hover:top-6 group-hover:bg-[#8eaebb] z-10">
-                  <li className="hover:bg-slate-200">Uzb</li>
-                  <li>Eng</li>
-                  <li>Kor</li>
-                </ul>
-              </div>
-
-              <div>
-                {userInfo ? (
-                  <>
-                    <Link
-                      className="flex cursor-pointer justify-center items-center gap-2 text-sm text-black"
-                      to="/dashboard"
-                    >
-                      <span>
-                        {" "}
-                        <FaUserCircle />{" "}
-                      </span>
-                      <span>{userInfo?.firstName}</span>
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      className="flex cursor-pointer justify-center items-center gap-2 text-sm text-black"
-                      to="/login"
-                    >
-                      <span>
-                        {" "}
-                        <FaLock />{" "}
-                      </span>
-                      <span>Login</span>
-                    </Link>
-                  </>
-                )}
-              </div>
-            </div>
 
             {/* Mobile views */}
             <ul className="flex flex-col justify-start items-start text-sm font-bold uppercase ">
@@ -287,7 +233,7 @@ const Header = () => {
                 <Link
                   to="/"
                   className={`py-2 block ${
-                    pathname === "/" ? "text-[#059473]" : "text-black"
+                    pathname === '/' ? 'text-[#059473]' : 'text-black'
                   }`}
                 >
                   home
@@ -297,7 +243,7 @@ const Header = () => {
                 <Link
                   to="/shop"
                   className={`py-2 block ${
-                    pathname === "/shop" ? "text-[#059473]" : "text-black"
+                    pathname === '/shop' ? 'text-[#059473]' : 'text-black'
                   }`}
                 >
                   shop
@@ -339,7 +285,7 @@ const Header = () => {
             <div className="flex justify-center gap-5">
               <div
                 onClick={() =>
-                  navigate(userInfo ? "/dashboard/my-wishlist" : "/login")
+                  navigate(userInfo ? '/dashboard/my-wishlist' : '/login')
                 }
                 className="relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]"
               >
@@ -372,58 +318,38 @@ const Header = () => {
       {/* bottom header */}
 
       <div className="w-[85%] lg:w-[90%] mx-auto ">
-        <div className="flex w-full flex-wrap  md-lg:gap-8">
-          <div className="w-3/12 md-lg:w-full ">
-            <div className="bg-blue-700   relative">
-              <div
+        <div className="flex w-full flex-wrap items-center justify-between  md-lg:gap-8">
+          <div className="w-3/12 md-lg:w-full relative">
+            <div className="">
+              <button
                 onClick={() => setShowCategory(!showCategory)}
-                className="h-[50px] bg-blue-700  hover:bg-blue-600 transition-all duration-300 text-white flex justify-center md-lg:justify-between md-lg:px-6 items-center gap-3 font-bold text-md cursor-pointer"
+                className="py-2 rounded-lg w-[160px] bg-[#4258af] text-white flex justify-center md-lg:justify-between md-lg:px-6 items-center gap-3 font-bold text-md cursor-pointer"
               >
-                <div className="flex justify-center  items-center gap-3">
-                  <span>
-                    <FaList />
-                  </span>
-                  <span>
-                    <span>All Category </span>
-                  </span>
-                </div>
-                <span className="pt-1">
-                  {showCategory ? (
-                    <MdKeyboardArrowDown size={24} />
-                  ) : (
-                    <MdKeyboardArrowUp size={24} />
-                  )}
-                </span>
-              </div>
-              <div
-                className={`${
-                  showCategory ? "h-0" : "h-[500px]"
-                } overflow-hidden transition-all md-lg:relative duration-100 absolute z-[99999] bg-[#c4d3d5fe] w-full border-x`}
-              >
-                <ul className="py-2 text-slate-600 overflow-y-scroll h-full font-semibold uppercase">
-                  {categories?.map((cat, index) => {
-                    return (
-                      <li
-                        key={index}
-                        className="flex items-center hover:bg-slate-500 transition-all duration-300 hover:text-white  gap-2 justify-start px-2 py-[3px]"
-                      >
+                All Categories
+              </button>
+
+              {showCategory && (
+                <div className="w-full dropdown-scroll bg-white absolute top-[66px] border-[1px] border-[#e3e4e6] rounded-b-sm z-[88888] max-h-[450px] overflow-y-auto">
+                  <ul className="flex flex-col items-start w-full mb-0">
+                    {categories?.map((cat, index) => (
+                      <li key={index}>
                         <Link
                           onClick={() => setShowCategory(!showCategory)}
                           to={`/products?category=${cat.name}`}
-                          className="text-sm flex items-center justify-between capitalize w-full h-full"
+                          className="text-sm flex items-center justify-between gap-2 capitalize w-full h-full p-2"
                         >
                           <img
                             src={cat.image}
                             alt=""
-                            className="h-[33px] w-[33px] rounded-full object-fit"
+                            className="h-[33px] w-[33px] rounded-full object-cover"
                           />
                           {cat.name}
                         </Link>
                       </li>
-                    );
-                  })}
-                </ul>
-              </div>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
 
@@ -431,7 +357,7 @@ const Header = () => {
           <div className="w-9/12 pl-8 md-lg:pl-0 md-lg:w-full">
             <div className="flex flex-wrap w-full justify-between items-center md-lg:gap-6">
               <div className="w-8/12 md-lg:w-full">
-                <div className="flex border rounded-lg h-[50px] items-center relative gap-5">
+                <div className="flex border rounded-lg py-1 items-center relative gap-5">
                   <div className="relative after:absolute after:h-[25px] after:w-[1px] after:bg-[#afafaf] after:-right-[15px] md-lg:hidden">
                     <select
                       onChange={(e) => setCategory(e.target.value)}
@@ -441,8 +367,8 @@ const Header = () => {
                     >
                       <option value="">Category</option>
                       {categories.map((ctg, ind) => (
-                        <option key={ind} value={ctg.name}>
-                          {ctg.name}{" "}
+                        <option key={ind} className='dropdown-scroll' value={ctg.name}>
+                          {ctg.name}{' '}
                         </option>
                       ))}
                     </select>
@@ -454,12 +380,12 @@ const Header = () => {
                     name="value"
                     id="value"
                     placeholder="What are you looking for..."
-                    className="w-full relative bg-transparent text-slate-500 outline-0 px-3 h-full"
+                    className="w-full  relative bg-transparent text-slate-500 outline-0 px-3 h-full"
                   />
 
                   <button
                     onClick={searchItem}
-                    className="bg-blue-700 hover:bg-blue-600 transition-all duration-300 rounded-lg right-0 absolute px-8 h-full font-semibold uppercase text-white"
+                    className="bg-blue-700 dropdown-scroll hover:bg-blue-600 transition-all duration-300 rounded-lg right-0 absolute px-4 py-1 font-semibold uppercase text-white"
                   >
                     Search
                   </button>
