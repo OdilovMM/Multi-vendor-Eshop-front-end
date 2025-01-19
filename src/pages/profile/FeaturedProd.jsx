@@ -24,9 +24,9 @@ const FeaturedProducts = () => {
           <MoonLoader />
         </div>
       ) : (
-        <div className="w-[85%] mx-auto mt-3">
-          <h2 className="font-semibold text-2xl">{productTopic} Products</h2>
-          <div className=" flex flex-wrap gap-9 my-10">
+        <div className="w-[85%] sm:w-full md:w-full mx-auto mt-3">
+          <h2 className="font-semibold text-xl px-2">{productTopic} Products</h2>
+          <div className=" sm:grid sm:grid-cols-2 sm:my-6 sm:gap-2">
             {featuredProducts?.map((product, index) => (
               <Cart product={product} key={index} index={index} />
             ))}

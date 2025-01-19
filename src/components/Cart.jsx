@@ -61,7 +61,7 @@ const Cart = ({ product, index }) => {
     <>
       <div
         key={index}
-        className="w-[232px]  h-[410px] flex flex-col justify-between md:w-[180px] md:h-[290px] overflow-hidden border-[0.5px] border-grey-200 md-lg:w-[290px] group  rounded-[6px] shadow-md  relative cursor-pointer"
+        className="w-[232px]   h-[410px] flex flex-col justify-between md:w-[180px] md:h-[290px] overflow-hidden border-[0.5px] border-grey-200 md-lg:w-[290px] group  rounded-[6px] shadow-md  relative cursor-pointer"
       >
         <div className="relative h-[300px] overflow-hidden   ">
           <Link className=" h-full w-full   flex justify-center items-center transition-transform duration-500 transform lg:scale-105 :scale-105 xl:scale-105 group-hover:scale-110">
@@ -125,7 +125,7 @@ const Cart = ({ product, index }) => {
         </div>
         {/* bottom info */}
         <div className="flex flex-col h-[115px] overflow-hidden bg-[#fbf7fb] ">
-          <div className="px-3 py-3">
+          <div className="px-3 py-3 sm:text-[11px]">
             <h2>{product?.name.slice(0, 10)}...</h2>
             <div className="flex flex-row items-center justify-between">
               <p
@@ -145,14 +145,14 @@ const Cart = ({ product, index }) => {
               </div>
             </div>
             <div className="flex  justify-between items-center">
-              <h2 className="text-red-600 font-semibold text-[13px]">
+              <h2 className="text-red-600 font-semibold text-[13px] sm:text-[9px]">
                 {product?.brand}
               </h2>
-              <h2 className="text-blue-600 font-semibold">
+              <h2 className="text-blue-600 font-semibold sm:text-[9px]">
                 {product?.shopName}
               </h2>
             </div>
-            <h2 className="text-green-600 font-semibold mb-1">
+            <h2 className="text-green-600 font-semibold mb-1 sm:text-[9px]">
               {product?.category}
             </h2>
           </div>

@@ -100,7 +100,7 @@ const SearchPage = () => {
       </div>
 
       <div className="py-4">
-        <div className="w-full md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto">
+        <div className="w-full md:w-full sm:w-full lg:w-[90%] h-full mx-auto">
           <div className={`md:block hidden ${!filter ? "mb-6" : "mb-0"}`}>
             <button
               onClick={() => setFilter(!filter)}
@@ -269,7 +269,7 @@ const SearchPage = () => {
               </div>
               {/* latest */}
 
-              <div className="py-5 flex flex-col gap-4 md:hidden">
+              <div className="py-5 grid grid-cols-4 gap-4 md:hidden">
                 <Products title="New Arrivals" products={latestProduct} />
               </div>
             </div>
@@ -312,7 +312,7 @@ const SearchPage = () => {
                     <MoonLoader margin={3} size={39} />
                   </div>
                 ) : (
-                  <div className="flex flex-row gap-[8px] flex-wrap">
+                  <div className="sm:grid sm:grid-cols-2 md:flex md:flex-col gap-[8px] sm:gap-0 flex-wrap">
                     {products?.map((product, index) => {
                       return <Cart product={product} key={index} />;
                     })}

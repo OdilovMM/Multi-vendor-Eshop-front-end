@@ -26,14 +26,14 @@ const Home = () => {
         </div>
       </div>
       <Category />
-      <div className="py-[40px]">
+      <div className="py-[40px] sm:py-[18px] mb-12 sm:mb-[6px]">
         <FeaturedProducts
           products={topRated}
           title="Popular Products"
           type="top-rated"
         />
       </div>
-      <div className="py-[40px] mb-12">
+      <div className="py-[40px] sm:py-[18px] mb-12 sm:mb-[6px]">
         <FeaturedProducts
           products={newArrivals}
           title="New Arrivals"
