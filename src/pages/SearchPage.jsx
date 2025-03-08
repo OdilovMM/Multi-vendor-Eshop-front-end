@@ -312,7 +312,7 @@ const SearchPage = () => {
                     <MoonLoader margin={3} size={39} />
                   </div>
                 ) : (
-                  <div className="sm:grid sm:grid-cols-2 md:flex md:flex-col gap-[8px] sm:gap-0 flex-wrap">
+                  <div className="flex flex-row flex-wrap gap-2 ">
                     {products?.map((product, index) => {
                       return <Cart product={product} key={index} />;
                     })}

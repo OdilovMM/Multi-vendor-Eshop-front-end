@@ -18,7 +18,7 @@ const SearchPage = () => {
 
   const searchCategory = searchParams.get("category");
   const searchValue = searchParams.get("value");
-  console.log(searchCategory, searchValue);
+  // console.log(searchCategory, searchValue);
 
   const {
     latestProduct,

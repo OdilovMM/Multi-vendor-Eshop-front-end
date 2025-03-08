@@ -16,7 +16,6 @@ const CategoryProducts = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const searchCategory = searchParams.get("category");
-  console.log("category:", searchCategory);
 
   const {
     latestProduct,

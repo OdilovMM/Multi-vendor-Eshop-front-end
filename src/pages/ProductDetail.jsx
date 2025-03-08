@@ -22,6 +22,7 @@ import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 import { IoBagAddSharp } from "react-icons/io5";
 import { ImageSlider } from "../components";
 import { addRemoveCart } from "../store/reducers/cartReducer";
+import toast from "react-hot-toast";
 
 const ProductDetail = () => {
   const [state, setState] = useState("reviews");
@@ -74,14 +75,16 @@ const ProductDetail = () => {
   };
 
   const buyNow = () => {
-    let price = 0;
-    if (product.discount !== 0) {
-      price =
-        product?.price - Math.floor((product?.price * product?.discount) / 100);
-    } else {
-      price = product?.price;
+    if (!userInfo) {
+      toast.error('Login first')
+      navigate("/login");
+      return;
     }
-
+  
+    let price = product?.discount !== 0 
+      ? product?.price - Math.floor((product?.price * product?.discount) / 100) 
+      : product?.price;
+  
     const obj = [
       {
         sellerId: product?.sellerId,
@@ -95,6 +98,7 @@ const ProductDetail = () => {
         ],
       },
     ];
+  
     navigate("/shipping", {
       state: {
         products: obj,
@@ -105,6 +109,41 @@ const ProductDetail = () => {
     });
   };
 
+  // const buyNow = (userInfo) => {
+  //   console.log(userInfo.id)
+  //   let price = 0;
+  //   if(!userInfo.id) {
+  //     navigate('/login')
+  //   } else if (product.discount !== 0) {
+  //     price =
+  //       product?.price - Math.floor((product?.price * product?.discount) / 100);
+  //   } else {
+  //     price = product?.price;
+  //   }
+
+  //   const obj = [
+  //     {
+  //       sellerId: product?.sellerId,
+  //       shopName: product?.shopName,
+  //       price: qty * (price - Math.floor((price * 5) / 100)),
+  //       products: [
+  //         {
+  //           qty,
+  //           productInfo: product,
+  //         },
+  //       ],
+  //     },
+  //   ];
+  //   navigate("/shipping", {
+  //     state: {
+  //       products: obj,
+  //       price: price * qty,
+  //       shippingFee: 10,
+  //       items: qty,
+  //     },
+  //   });
+  // };
+
   return (
     <div className="overflow-y-hidden">
       <div className=" bg-slate-200 md:min-w-[320px] h-[120px] mt-6 bg-cover bg-no-repeat bg-left">
@@ -113,7 +152,7 @@ const ProductDetail = () => {
             <BreadCrumbs
               from="/"
               fromPage={product?.category}
-              to="/product/details/:defea"
+              to="/shop"
               iconSize={18}
               toPage={product?.name}
               iconColor="black"
@@ -354,7 +393,7 @@ const ProductDetail = () => {
 
       {/* related products */}
 
-      <div className="w-full py-4 md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto pb-12">
+      <div className="w-full py-5 md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto pb-12">
         <h2 className="text-2xl py-8  font-semibold text-blue-700">
           Related Products
         </h2>

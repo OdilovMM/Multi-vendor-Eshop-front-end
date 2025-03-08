@@ -6,7 +6,7 @@ const MainLayout = () => {
   return (
     <>
       <Header />
-      <main className='w-[95%]  mx-auto sm:w-[97%] sm:mx-auto'>
+      <main className='w-[85%] mx-auto sm:w-[90%] sm:mx-auto mt-2'>
         <section className='w-full'>
           <Outlet />
         </section>

@@ -61,7 +61,7 @@ const Cart = ({ product, index }) => {
     <>
       <div
         key={index}
-        className="w-[232px]   h-[410px] flex flex-col justify-between md:w-[180px] md:h-[290px] overflow-hidden border-[0.5px] border-grey-200 md-lg:w-[290px] group  rounded-[6px] shadow-md  relative cursor-pointer"
+        className="hover:shadow-2xl transition-shadow duration-300 w-[210px]   h-[410px] flex flex-col justify-between md:w-[180px] md:h-[290px] overflow-hidden  md-lg:w-[290px] group  rounded-[6px]   relative cursor-pointer"
       >
         <div className="relative h-[300px] overflow-hidden   ">
           <Link className=" h-full w-full   flex justify-center items-center transition-transform duration-500 transform lg:scale-105 :scale-105 xl:scale-105 group-hover:scale-110">
@@ -109,16 +109,16 @@ const Cart = ({ product, index }) => {
             style={{
               zIndex: "1",
             }}
-            className="absolute bottom-[1px] left-[193px] w-full transform "
+            className="absolute bottom-[2px] left-[170px] w-full transform "
           >
             <button
               onClick={() => handleAddRemoveCart(product?._id)}
-              className="flex bg-white rounded-full p-[5px] items-center justify-center"
+              className="flex bg-gray-100 rounded-full p-[5px] items-center justify-center"
             >
               {isInCart ? (
                 <IoBagAdd size={25} color="blue" />
               ) : (
-                <IoBagAdd size={25} color="green" />
+                <IoBagAdd size={25} color="red" />
               )}
             </button>
           </div>
