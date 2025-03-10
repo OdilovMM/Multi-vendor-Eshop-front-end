@@ -13,8 +13,8 @@ const Footer = () => {
           <div className="flex flex-col gap-3">
             <h2 className="font-bold">Address</h2>
             <ul className="flex flex-col gap-2 text-white">
-              <li>Address : 150100, Fergana, Uzbekistan</li>
-              <li>Phone : +998905329914</li>
+              <li>Address : Gimhae, South Korea</li>
+              <li>Phone : 01079366037</li>
               <li>Email : dssrinman@gmail.com</li>
             </ul>
           </div>
@@ -98,7 +98,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="w-[90%] flex flex-wrap justify-center items-center text-white mx-auto py-5 text-center">
-        <span>{currentYear} My Shop Group </span>
+        <span>{currentYear} by Odilov Madaminjon </span>
       </div>
     </footer>
   );

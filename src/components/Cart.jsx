@@ -109,7 +109,7 @@ const Cart = ({ product, index }) => {
             style={{
               zIndex: "1",
             }}
-            className="absolute bottom-[2px] left-[170px] w-full transform "
+            className="absolute bottom-[2px] md:left-[10px] left-[170px] w-full transform "
           >
             <button
               onClick={() => handleAddRemoveCart(product?._id)}

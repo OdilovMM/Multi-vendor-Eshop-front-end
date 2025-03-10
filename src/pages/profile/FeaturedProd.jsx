@@ -20,18 +20,18 @@ const FeaturedProducts = () => {
   return (
     <>
       {isLoading ? (
-        <div className="w-[85%] mx-auto flex justify-center items-center min-h-[70vh] gap-9 my-10">
+        <div className="w-full mx-auto flex justify-center items-center min-h-[70vh] gap-9 my-10">
           <MoonLoader />
         </div>
       ) : (
-        <div className="w-[85%] sm:w-full md:w-full mx-auto mt-3">
-          <h2 className="font-semibold text-xl px-2">{productTopic} Products</h2>
-          <div className=" sm:grid sm:grid-cols-2 sm:my-6 sm:gap-2">
-            {featuredProducts?.map((product, index) => (
-              <Cart product={product} key={index} index={index} />
-            ))}
-          </div>
-        </div>
+        <div className="w-full mx-auto my-2 py-2">
+  <h2 className="font-semibold text-xl px-4 py-5 text-blue-500">{productTopic} Products</h2>
+  <div className="grid grid-cols-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 px-4 py-4">
+    {featuredProducts?.map((product, index) => (
+      <Cart product={product} key={index} index={index} />
+    ))}
+  </div>
+</div>
       )}
     </>
   );
